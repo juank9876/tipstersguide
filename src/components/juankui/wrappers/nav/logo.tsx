@@ -9,10 +9,10 @@ export function Logo({ site_title, site_logo }: SiteSettings) {
       <Image
         alt={site_title || "Site logo"}
         src={site_logo || "/logo-1.png"}
-        width={90}
-        height={75} // <= asegúrate de que sea más pequeño que el contenedor
+        width={75}
+        height={75} // <= logo cuadrado!
         className="h-full"
-      ></Image>
+      />
     </Link>
   )
 }

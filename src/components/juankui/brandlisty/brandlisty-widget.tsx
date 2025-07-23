@@ -135,7 +135,7 @@ export default function BrandlistyWidget({
 
 
   return (
-    <div className=" relative flex w-full flex-col overflow-auto rounded border bg-white shadow"
+    <div className=" relative flex w-full flex-col overflow-auto h-fit rounded border bg-white shadow"
     //style={{ height: 800 }}
     >
 

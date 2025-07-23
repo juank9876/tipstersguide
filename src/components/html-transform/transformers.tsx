@@ -3,7 +3,7 @@ import { DOMNode, domToReact, Element, HTMLReactParserOptions } from 'html-react
 import { Button } from '../ui/button'
 import Image from 'next/image'
 import { CardShine } from '../juankui/legacy/card-shine'
-import { ArrowRight, Star, Sparkles, Flame, Bolt, Circle } from 'lucide-react'
+import { ArrowRight, Star, Sparkles, Flame, Bolt, Circle, Dice1, Dice3, Dice4, Dice5, Dice2, Dice6, Dice1Icon, Dice3Icon, Dice4Icon, Dice2Icon, Dice6Icon, Dice5Icon } from 'lucide-react'
 import BrandlistyWidget from '../juankui/brandlisty/brandlisty-widget'
 import { MagicCard } from '../magicui/magic-card'
 import { fixAttribs } from '@/lib/utils'
@@ -24,18 +24,24 @@ export function transformBrandlisty(el: Element) {
   )
 }
 
-//Version upgraded chatgp
 export function transformRow(el: Element, options: HTMLReactParserOptions) {
+  //console.log('Hijos de <row>:', el.children.length);
   const validChildren = el.children.filter(
     (child) => child.type === 'tag'
   ) as Element[]
 
+  //Fix Bug de que se sale del main, ya que se aplica flex-row a todo
+  if (el.children.length === 1) {
+    return (
+      <div className={`flex flex-col items-center justify-center ${el.attribs?.class || ''}`}>
+        {domToReact(validChildren as DOMNode[], options)}
+      </div>
+    )
+  }
   return (
-
-    <div className={`flex w-full flex-col lg:flex-row lg:flex-wrap ${el.attribs?.class || ''}`}>
+    <div className={`flex flex-col lg:flex-row lg:flex-wrap ${el.attribs?.class || ''}`}>
       {domToReact(validChildren as DOMNode[], options)}
     </div>
-
   )
 }
 
@@ -81,13 +87,37 @@ export function transformCol(el: Element, options: HTMLReactParserOptions) {
   )
 }
 
-//Version Bootstrap
-
 export function transformCard(el: Element, options: HTMLReactParserOptions) {
+  // Busca si el primer hijo es un badge (por ejemplo, un número envuelto en un span o div)
+  const [firstChild, ...restChildren] = el.children as Element[];
+  let badgeContent = null;
+  let contentChildren = el.children as DOMNode[];
+
+  // Si el primer hijo es un número o tiene un atributo especial, lo usamos como badge
+  if (
+    firstChild &&
+    firstChild.type === 'tag' &&
+    (firstChild.name === 'span' || firstChild.name === 'div') &&
+    firstChild.children &&
+    firstChild.children[0] &&
+    firstChild.children[0].type === 'text' &&
+    /^[0-9]+$/.test((firstChild.children[0] as any).data.trim())
+  ) {
+    badgeContent = (firstChild.children[0] as any).data;
+    contentChildren = restChildren;
+  }
+
   return (
-    <CardShine className={`relative mx-auto my-5 flex w-full max-w-[350px] overflow-hidden transition duration-500 hover:scale-105 hover:bg-[var(--color-primary-light)] ${el.attribs?.class || ''}`}>
-      {domToReact(el.children as DOMNode[], options)}
-    </CardShine>
+    <div className='relative flex flex-col items-center justify-center'>
+      <div className="absolute top-0 left-0 z-50">
+        <div className="size-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-white flex items-center justify-center text-3xl font-bold rounded-full shadow-lg">
+          {badgeContent || '1'}
+        </div>
+      </div>
+      <CardShine className={`mx-5 relative my-5 flex w-full max-w-[350px] overflow-hidden transition duration-500 hover:bg-gray-50 ${el.attribs?.class || ''}`}>
+        {domToReact(contentChildren, options)}
+      </CardShine>
+    </div>
   )
 }
 
@@ -158,9 +188,17 @@ export function transformTextElement(el: Element, options: HTMLReactParserOption
 
 export function transformContainer(el: Element, options: HTMLReactParserOptions) {
   return (
-    <div className={`border-primary container rounded-lg ${el.attribs?.class || ''}`}>
+    <div className={`border-primary flex flex-col justify-center items-center bg-white rounded-lg p-3 sm:px-4 sm:py-4 md:px-6 md:py-4 lg:px-8 lg:py-4 ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
+  )
+}
+
+export function transformSection(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <section className={`bg-white rounded-lg`}>
+      {domToReact(el.children as DOMNode[], options)}
+    </section>
   )
 }
 
@@ -184,7 +222,7 @@ export function transformImg(el: Element) {
       <Image
         alt={el.attribs.alt || 'sample image'}
         //src={'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTKbWAJHSZvmB6idZtJ6VtB1O6pvq2K7UVgIzsSxcpyxmu2GOqZwBlgV-NJm1kSNLJl7fnqNRG4ep75DRePRSgWM_v99GQISy6BUURYHYHnOg'}
-        src={el.attribs.src || 'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTKbWAJHSZvmB6idZtJ6VtB1O6pvq2K7UVgIzsSxcpyxmu2GOqZwBlgV-NJm1kSNLJl7fnqNRG4ep75DRePRSgWM_v99GQISy6BUURYHYHnOg'}
+        src={el.attribs.src || 'https://imgs.search.brave.com/Q3KM87IGdN-WX5xySRtFxbsjUYGEvnHmDEKXdVYkBys/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9jYXNp/bm8tc2lnbi0zMjgy/MzU0LmpwZw'}
         fill
         className="rounded-lg object-contain"
       />
@@ -194,12 +232,19 @@ export function transformImg(el: Element) {
 }
 
 export function transformH2(el: Element, options: HTMLReactParserOptions) {
+  const icons = [ArrowRight, Star, Sparkles, Flame, Bolt, Dice1Icon, Dice2Icon, Dice3Icon, Dice4Icon, Dice5Icon, Dice6Icon]
+  const RandomIcon = icons[Math.floor(Math.random() * icons.length)]
   return (
-    <div className={`flex flex-col space-y-5 pt-10 ${el.attribs?.class || ''}`}>
-      <h2>
-        {domToReact(el.children as DOMNode[], options)}
-      </h2>
-      <span className="bg-accent h-1 w-24 rounded lg:mx-auto" />
+    <div className={`flex flex-row space-x-5 py-8 items-center justify-start ${el.attribs?.class || ''}`}>
+      <div className='bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] p-4 rounded-xl'>
+        <RandomIcon className='text-white' />
+      </div>
+      <div className='flex flex-col items-start justify-center space-y-3'>
+        <h2 className='text-start'>
+          {domToReact(el.children as DOMNode[], options)}
+        </h2>
+        <span className="bg-gradient-to-l from-[var(--color-accent)] to-[var(--color-primary)] h-2 w-64 rounded lg:my-auto" />
+      </div>
     </div>
   )
 }
@@ -210,7 +255,7 @@ export function transformH3(el: Element, options: HTMLReactParserOptions) {
 
   return (
     <div className={`mt-8 flex flex-row items-center justify-start space-x-3 ${el.attribs?.class || ''}`}>
-      <RandomIcon className='text-accent mb-0 pb-0' />
+      <RandomIcon className='text-white mb-0 pb-0' />
       <h3 className='text-[var(--color-accent-dark)]'>
         {domToReact(el.children as DOMNode[], options)}
       </h3>
@@ -306,6 +351,7 @@ export function transformInput(el: Element, options: HTMLReactParserOptions) {
     />
   )
 }
+
 export function transformTextarea(el: Element, options: HTMLReactParserOptions) {
   const attribs = fixAttribs(el.attribs);
 
@@ -316,6 +362,7 @@ export function transformTextarea(el: Element, options: HTMLReactParserOptions) 
     />
   )
 }
+
 export function transformBtnSubmit(el: Element, options: HTMLReactParserOptions) {
   return (
     <Button variant={'accent'} className={`text-white ${el.attribs?.class || ''}`}>

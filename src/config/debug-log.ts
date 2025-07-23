@@ -4,12 +4,13 @@
 
 export const debug = {
     brandlisty: {
-        url: true,
+        url: false,
         response: false,
-        html: true,
+        html: false,
     },
     fetcher: false,
     pages: false,
+    htmlContent: false,
     cssContent: false,
     postOrCategoryPermalink: false,
     currentPostOrCategoryUrl: false,

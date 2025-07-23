@@ -27,7 +27,8 @@ import {
   transformBlockquote,
   transformInput,
   transformBtnSubmit,
-  transformTextarea
+  transformTextarea,
+  transformSection
 } from './transformers'
 import type { JSX } from 'react'
 
@@ -66,6 +67,7 @@ const rules: TransformerRule[] = [
   { className: 'btn-submit', transformer: transformBtnSubmit },
 
   //Tags HTML
+  { tagName: 'section', transformer: transformSection },
   { tagName: 'form', transformer: transformForm },
   { tagName: 'h2', transformer: transformH2 },
   { tagName: 'h3', transformer: transformH3 },

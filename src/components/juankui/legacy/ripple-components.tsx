@@ -53,7 +53,7 @@ export function LinkRipple({ href, children, className }: { href: string, childr
         <Link
           href={href}
           type="button"
-          className={`${className} flex text-white bg-transparent rounded-xl justify-center items-center font-bold px-3 py-1 lg:px-5 lg:py-3 overflow-hidden relative hover:bg-opacity-90 transition-all duration-300`}
+          className={`${className} flex text-white bg-transparent rounded-full justify-center items-center font-bold px-3 py-1 lg:px-5 lg:py-3 overflow-hidden relative hover:bg-opacity-90 transition-all duration-300`}
           onClick={handleClick}
         >
           {children}
