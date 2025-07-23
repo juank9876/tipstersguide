@@ -60,7 +60,9 @@ export async function fetchCategoryById(id: string): Promise<Category> {
   return fetcher<Category>({ method: "category", id });
 }
 export async function fetchMenu(): Promise<NavItemType[]> {
-  return fetcher<NavItemType[]>({ method: "menu" });
+  const menu = await fetcher<NavItemType[]>({ method: "menu" });
+  debugLog(debug.menu, menu)
+  return menu;
 }
 export async function fetchSiteSettings() {
   return fetcher<SiteSettings>({ method: "site-settings" });

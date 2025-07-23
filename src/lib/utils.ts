@@ -90,3 +90,16 @@ export async function createPageTitle(pageTitle: string) {
 
   return title
 }
+
+export function decodeHtmlEntities(str: string) {
+  if (!str) return '';
+  return str.replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec))
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&#039;/g, "'") // para casos como &#039;
+    .replace(/\\\\'/g, "'") // para \\'
+    .replace(/\\'/g, "'");  // para \'
+}

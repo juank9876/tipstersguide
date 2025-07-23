@@ -1,5 +1,6 @@
 import { Onest, Poppins } from "next/font/google";
 import "./globals.css";
+import 'atropos/css'
 import { Header } from "@/components/juankui/wrappers/nav/header";
 import { Footer } from "@/components/juankui/wrappers/footer";
 import { fetchSiteSettings } from "@/api-fetcher/fetcher";

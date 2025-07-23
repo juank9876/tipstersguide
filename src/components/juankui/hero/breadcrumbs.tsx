@@ -75,7 +75,7 @@ export function Breadcrumbs({ breadcrumbs, className }: BreadcrumbsProps) {
           <Fragment key={bread.url}>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href={bread.url}>{bread.title}</Link>
+                <Link className="text-slate-400" href={bread.url}>{bread.title}</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />

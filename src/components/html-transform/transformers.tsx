@@ -108,7 +108,7 @@ export function transformCard(el: Element, options: HTMLReactParserOptions) {
   }
 
   return (
-    <div className='relative flex flex-col items-center justify-center'>
+    <div className='relative flex flex-col '>
       <div className="absolute top-0 left-0 z-50">
         <div className="size-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-white flex items-center justify-center text-3xl font-bold rounded-full shadow-lg">
           {badgeContent || '1'}
@@ -180,7 +180,7 @@ export function transformFeatureList(el: Element, options: HTMLReactParserOption
 
 export function transformTextElement(el: Element, options: HTMLReactParserOptions) {
   return (
-    <div className={`text-element py-3 ${el.attribs?.class || ''}`}>
+    <div className={`text py-3 ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
   )

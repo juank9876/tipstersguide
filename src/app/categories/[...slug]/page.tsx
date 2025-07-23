@@ -55,7 +55,7 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
 
         return { type: 'category', category }
     } else {
-        console.error('Category not found', categoryId, categorySlug)
+        console.log('Category not found', categoryId, categorySlug)
     }
 
 

@@ -3,21 +3,25 @@ import { ButtonRipple, LinkRipple } from "../legacy/ripple-components"
 import { VideoHero } from "../optionals/video-hero"
 import Image from "next/image"
 import { Post, Page, SiteSettings, Category } from '@/types/types'
-import { formatDate } from "@/lib/utils"
+import { decodeHtmlEntities, formatDate } from "@/lib/utils"
 import { Breadcrumbs } from "./breadcrumbs"
 import { ParticlesFull } from "./particles"
+import { AtroposCasinos } from "./atropos-hero"
 
 type HomeProps = SiteSettings & Page
 
 export function HeroHomePage({ title, meta_title, meta_description, site_title, site_description }: HomeProps) {
 
   return (
-    <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden mb-10">
+    <section className="relative flex h-[50vh] w-full flex-col items-center justify-center overflow-hidden mb-10">
       <ParticlesFull />
       <VideoHero />
       <div className="w-full flex h-full flex-col items-center justify-center bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
         <div className="m-0 w-full flex items-center justify-center  p-4 py-9 md:gap-9 md:px-8 lg:px-12 lg:py-20">
 
+          {
+            <AtroposCasinos />
+          }
           <div className="flex flex-col w-full items-center justify-center space-y-2">
             <div className=" group/badge duration-400 w-fit flex flex-row items-center justify-center rounded-full bg-gradient-to-b from-[var(--color-primary-semi-dark)] hover:to-[var(--color-accent)] px-5 transition to-[var(--color-primary)]">
               <Star size={18} className="mr-2 inline text-[var(--color-accent-light)]" />
@@ -71,36 +75,73 @@ export function HeroPage({ title, meta_description, breadcrumbs }: Page) {
   )
 }
 
-export function HeroPost({ title, excerpt, author_avatar, author_name, created_at, breadcrumbs }: Post) {
+export function HeroPost({ title, excerpt, author_avatar, author_name, created_at, breadcrumbs, featured_image }: Post) {
+  function BreadcrumbsFull() {
+    return (
+      <div className="flex flex-row items-center justify-center gap-3">
+        {breadcrumbs && <Breadcrumbs className="flex justify-center" breadcrumbs={breadcrumbs} />}
+      </div>
+    )
+  }
+  function AuthorDate() {
+    return (
+      <div className="flex flex-row items-center justify-center gap-3">
+        <div className="flex w-max flex-row items-center justify-between space-x-3 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-bl from-[var(--color-accent)] to-[var(--color-primary)] px-3 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)]">
+          <Calendar1 className="text-white" />
+          <p className="text-gray-200 hover:text-white">{formatDate(created_at)}</p>
+        </div>
+
+        <div className="group-badge group mb-0 flex w-max flex-row items-center justify-between space-x-2 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] pl-2 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)] lg:space-x-3">
+          <div className="size-7 lg:size-10 relative mb-0 overflow-hidden rounded-full">
+            <Image
+              src={author_avatar || `https://api.dicebear.com/7.x/lorelei/svg?seed=${author_name || "default"}`}
+              alt={`Image of ${author_name}`}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <p className="text-gray-200 [.group-badge:hover_&]:text-white">{author_name}</p>
+        </div>
+      </div>
+    )
+  }
+  function TitleExcerpt() {
+    return (
+      <div className="flex flex-col w-full items-start justify-start gap-y-5">
+        <h1 className="text-white text-start mb-0 p-0 font-bold flex w-full max-w-[873px]">{title}</h1>
+        <p className=" text-white my-0 py-0 line-clamp-3">{decodeHtmlEntities(excerpt)}</p>
+      </div>
+    )
+  }
+  function FeaturedImage() {
+    return (
+      <div className="relative w-1/3 h-[300px]">
+        <Image
+          src={featured_image}
+          alt=""
+          fill
+          className="object-contain"
+        />
+      </div>
+    )
+  }
+
   return (
-    <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden pb-10">
+    <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden pb-10 ">
       <ParticlesFull />
-      <div className="w-full flex h-full flex-col items-center justify-center bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
-        <div className="m-0 w-full flex items-center justify-center gap-5 p-4 py-9 md:gap-9 md:px-8 lg:px-12 lg:py-20">
-          <div className="flex flex-col w-[70vw] items-center justify-center space-y-2">
-            <div className="group-badge group mb-0 flex w-max flex-row items-center justify-between space-x-2 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] pl-2 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)] lg:space-x-3">
-              <div className="size-7 lg:size-10 relative mb-0 overflow-hidden rounded-full">
-                <Image
-                  src={author_avatar || `https://api.dicebear.com/7.x/lorelei/svg?seed=${author_name || "default"}`}
-                  alt={`Image of ${author_name}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <p className="text-gray-200 [.group-badge:hover_&]:text-white">{author_name}</p>
-            </div>
-            <h1 className="text-white text-center md:text-[64px] font-inter md:leading-[72px] font-bold mb-4 md:mt-0 mt-2 text-[34px] leading-[44px] mx-auto flex w-full max-w-[873px] flex-col items-center">
-              {title}
-            </h1>
-            <p className=" text-white text-center md:text-[20px] md:leading-[28px] font-normal md:px-[86px]">{excerpt}</p>
-            <div className="flex w-max flex-row items-center justify-between space-x-3 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-bl from-[var(--color-accent)] to-[var(--color-primary)] px-3 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)]">
-              <Calendar1 className="text-white" />
-              <p className="text-gray-200 hover:text-white">{formatDate(created_at)}</p>
-            </div>
-            <div className="flex flex-row items-center justify-center gap-3 mt-8">
-              {breadcrumbs && <Breadcrumbs className="flex justify-center" breadcrumbs={breadcrumbs} />}
+      <div className="w-full flex h-full flex-col items-center justify-start bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
+        <div className="m-0 w-[70vw] flex items-center justify-center gap-5 pb-30 pt-10">
+
+          <div className="w-full flex flex-row space-x-4 items-center justify-center">
+            <FeaturedImage />
+
+            <div className="flex flex-col w-[40vw] items-start justify-start gap-y-5">
+              <BreadcrumbsFull />
+              <TitleExcerpt />
+              <AuthorDate />
             </div>
           </div>
+
         </div>
       </div>
     </section>

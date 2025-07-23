@@ -57,13 +57,13 @@ async function AuthorCard({ name, avatar, bio, author_id }: { name: string, avat
 
   // Si no hay enlaces válidos, no renderices la fila de iconos
   return (
-    <div className="border-t border-b py-6 px-10 flex items-center gap-4 my-6 rounded-lg hover:to-[var(--color-primary-semi-dark)] transition-colors bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary-dark)]">
+    <div className="border-t w-1/2 border-b py-6 px-10 flex items-center gap-4 my-6 rounded-lg hover:to-[var(--color-primary-semi-dark)] transition-colors bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)]">
       <div className="flex-shrink-0">
         <Image
           src={avatar || 'https://api.dicebear.com/7.x/lorelei/svg?seed=default'}
           alt={name}
-          width={56}
-          height={56}
+          width={64}
+          height={64}
           className="rounded-full border object-cover"
         />
       </div>

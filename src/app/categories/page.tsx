@@ -16,6 +16,9 @@ export async function generateMetadata() {
 
 export default async function CategoriesPage() {
   const categories = await fetchCategories()
+  if (categories.length === 0) {
+    return <main className="flex flex-col w-full h-screen items-center justify-center">No categories found</main>
+  }
   return (
     <main className={`flex w-full flex-1 flex-col items-center justify-center pb-10`}>
       <Section className="h-full items-center flex flex-col justify-center my-10">
