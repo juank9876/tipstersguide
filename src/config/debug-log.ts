@@ -12,9 +12,9 @@ export const debug = {
     pages: false,
     htmlContent: false,
     cssContent: false,
-    postOrCategoryPermalink: true,
-    currentPostOrCategoryUrl: true,
-    menu: true,
+    postOrCategoryPermalink: false,
+    currentPostOrCategoryUrl: false,
+    menu: false,
 }
 
 

@@ -13,7 +13,7 @@ type HomeProps = SiteSettings & Page
 export function HeroHomePage({ title, meta_title, meta_description, site_title, site_description }: HomeProps) {
 
   return (
-    <section className="relative flex h-[50vh] w-full flex-col items-center justify-center overflow-hidden mb-10">
+    <section id="hero" className="relative flex h-[50vh] w-full flex-col items-center justify-center overflow-hidden mb-10">
       <ParticlesFull />
       <VideoHero />
       <div className="w-full flex h-full flex-col items-center justify-center bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
@@ -86,12 +86,12 @@ export function HeroPost({ title, excerpt, author_avatar, author_name, created_a
   function AuthorDate() {
     return (
       <div className="flex flex-row items-center justify-center gap-3">
-        <div className="flex w-max flex-row items-center justify-between space-x-3 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-bl from-[var(--color-accent)] to-[var(--color-primary)] px-3 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)]">
+        <div className="flex w-max flex-row items-center justify-between space-x-3 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-bl from-[var(--color-accent)] hover:to-[var(--color-primary)] px-3 pr-3 transition duration-500 hover:border-[var(--color-primary)] to-[var(--color-primary-semi-dark)]">
           <Calendar1 className="text-white" />
           <p className="text-gray-200 hover:text-white">{formatDate(created_at)}</p>
         </div>
 
-        <div className="group-badge group mb-0 flex w-max flex-row items-center justify-between space-x-2 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] pl-2 pr-3 transition duration-500 hover:border-[var(--color-primary)] hover:to-[var(--color-primary-semi-dark)] lg:space-x-3">
+        <div className="group-badge group mb-0 flex w-max flex-row items-center justify-between space-x-2 rounded-full border border-[var(--color-primary-light)] bg-gradient-to-br from-[var(--color-accent)] hover:to-[var(--color-primary)] pl-2 pr-3 transition duration-500 hover:border-[var(--color-primary)] to-[var(--color-primary-semi-dark)] lg:space-x-3">
           <div className="size-7 lg:size-10 relative mb-0 overflow-hidden rounded-full">
             <Image
               src={author_avatar || `https://api.dicebear.com/7.x/lorelei/svg?seed=${author_name || "default"}`}
@@ -108,41 +108,46 @@ export function HeroPost({ title, excerpt, author_avatar, author_name, created_a
   function TitleExcerpt() {
     return (
       <div className="flex flex-col w-full items-start justify-start gap-y-5">
-        <h1 className="text-white text-start mb-0 p-0 font-bold flex w-full max-w-[873px]">{title}</h1>
+        <h1 className="text-white text-[42px] text-start mb-0 p-0 font-bold flex w-full max-w-[873px]">{title}</h1>
         <p className=" text-white my-0 py-0 line-clamp-3">{decodeHtmlEntities(excerpt)}</p>
       </div>
     )
   }
   function FeaturedImage() {
+    if (!featured_image) return null;
     return (
-      <div className="relative w-1/3 h-[300px]">
+      <div className="relative w-full lg:w-1/3 h-48 sm:h-64 lg:h-[300px] mr-0 pr-0 flex-shrink-0">
         <Image
           src={featured_image}
           alt=""
           fill
           className="object-contain"
+          priority
         />
       </div>
     )
   }
 
   return (
-    <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden pb-10 ">
+    <section className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden">
       <ParticlesFull />
-      <div className="w-full flex h-full flex-col items-center justify-start bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
-        <div className="m-0 w-[70vw] flex items-center justify-center gap-5 pb-30 pt-10">
-
-          <div className="w-full flex flex-row space-x-4 items-center justify-center">
-            <FeaturedImage />
-
-            <div className="flex flex-col w-[40vw] items-start justify-start gap-y-5">
-              <BreadcrumbsFull />
-              <TitleExcerpt />
-              <AuthorDate />
-            </div>
+      <div
+        className="w-full flex h-full flex-col items-center justify-start"
+        style={{
+          background: "linear-gradient(to top, #24243e, #302b63, #0f0c29)",
+        }}
+      >
+        <div className="m-0 w-full lg:w-[60vw] h-[40vh] flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 pt-10 lg:px-0 px-5">
+          {/* Imagen destacada */}
+          <FeaturedImage />
+          {/* Bloque de información */}
+          <div className="flex flex-col w-full lg:w-2/3 items-start justify-start gap-y-5">
+            <BreadcrumbsFull />
+            <TitleExcerpt />
+            <AuthorDate />
           </div>
-
         </div>
+
       </div>
     </section>
   )

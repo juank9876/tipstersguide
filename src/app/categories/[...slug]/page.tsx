@@ -89,13 +89,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug?: st
 
         if (data.type === 'post') {
             return {
-                title: createPageTitle(data.post.title),
+                title: await createPageTitle(data.post.title),
                 description: capitalize(data.post.excerpt),
             }
         }
 
         return {
-            title: capitalize(data.category.name),
+            title: await createPageTitle(data.category.name),
             description: capitalize(data.category.description),
         }
     } catch (error) {

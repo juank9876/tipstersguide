@@ -1,13 +1,14 @@
 import { Card, CardContent } from '@/components/ui/card'
 import { ShineBorder } from '@/components/magicui/shine-border'
 import Image from 'next/image'
-import { formatDate } from '@/lib/utils'
+import { decodeHtmlEntities, formatDate } from '@/lib/utils'
 import { Link } from '@/components/juankui/optionals/link'
 import { Category, Post } from '@/types/types'
 
 export function CardPostCategory({ post, category }: { post: Post, category: Category }) {
   //const categoryUrl = category.parent_id ? category.parent_slug + "/" + category.slug : category.slug
   const categoryUrl = category.slug
+
   return (
     <>
       {/*Card para PC*/}
@@ -31,9 +32,9 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
 
               {/* Contenido derecho con altura igual */}
               <div className="flex flex-1 flex-col justify-between px-6 py-3 h-full">
-                <h2 className="mb-0 text-start text-3xl font-bold text-white">{post.title}</h2>
+                <h2 className="mb-0 text-start text-3xl font-bold text-white">{decodeHtmlEntities(post.title)}</h2>
                 <p className="text-slate-200 mb-0 pb-0 text-sm">{formatDate(post.published_at)}</p>
-                <p className="text-slate-200 text-base">{post.excerpt.length > 200 ? post.excerpt.slice(0, 200) + "..." : post.excerpt}</p>
+                <p className="text-slate-200 text-base">{decodeHtmlEntities(post.excerpt.length > 200 ? post.excerpt.slice(0, 200) + "..." : post.excerpt)}</p>
 
                 <div className=" px-5 flex flex-row items-center justify-start space-x-3  py-3 bg-[var(--color-accent-dark)] border border-[var(--color-accent-light)] rounded-lg">
                   <div className=" size-10 relative overflow-hidden rounded-full">

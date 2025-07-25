@@ -3,7 +3,7 @@ import { DOMNode, domToReact, Element, HTMLReactParserOptions } from 'html-react
 import { Button } from '../ui/button'
 import Image from 'next/image'
 import { CardShine } from '../juankui/legacy/card-shine'
-import { ArrowRight, Star, Sparkles, Flame, Bolt, Circle, Dice1, Dice3, Dice4, Dice5, Dice2, Dice6, Dice1Icon, Dice3Icon, Dice4Icon, Dice2Icon, Dice6Icon, Dice5Icon } from 'lucide-react'
+import { ArrowRight, Star, Sparkles, Flame, Bolt, Circle, Dice1, Dice3, Dice4, Dice5, Dice2, Dice6, Dice1Icon, Dice3Icon, Dice4Icon, Dice2Icon, Dice6Icon, Dice5Icon, ShieldCheck } from 'lucide-react'
 import BrandlistyWidget from '../juankui/brandlisty/brandlisty-widget'
 import { MagicCard } from '../magicui/magic-card'
 import { fixAttribs } from '@/lib/utils'
@@ -12,7 +12,15 @@ export function transformBrandlisty(el: Element) {
   const { apikey, listid, boton, limit, id } = el.attribs
 
   return (
-    <div className={`flex h-full ${el.attribs?.class || ''}`}>
+    <div className={`flex h-full flex-col ${el.attribs?.class || ''}`}>
+      <div className='flex flex-row items-center justify-center gap-8'>
+        <span className='bg-gradient-to-tr from-[var(--color-accent)] to-[var(--color-accent-dark)] text-white px-2 py-1 rounded-full inline-flex items-center justify-end gap-1 text-end text-sm font-bold mb-2'>
+          <Star className='size-3 mb-1' /> Recomendado en España
+        </span>
+        <span className='bg-gradient-to-br from-[var(--color-primary-semi-dark)] to-[var(--color-primary)] text-white px-2 py-1 rounded-full inline-flex items-center justify-end gap-1 text-end text-sm font-bold mb-2'>
+          <ShieldCheck className='size-4 mb-0.5' /> Verified
+        </span>
+      </div>
       <BrandlistyWidget
         key={id}
         apiKey={apikey || el.attribs['data-apikey']}
@@ -255,7 +263,7 @@ export function transformH3(el: Element, options: HTMLReactParserOptions) {
 
   return (
     <div className={`mt-8 flex flex-row items-center justify-start space-x-3 ${el.attribs?.class || ''}`}>
-      <RandomIcon className='text-white mb-0 pb-0' />
+      <RandomIcon className='text--[var(--color-accent-dark)] mb-0 pb-0' />
       <h3 className='text-[var(--color-accent-dark)]'>
         {domToReact(el.children as DOMNode[], options)}
       </h3>

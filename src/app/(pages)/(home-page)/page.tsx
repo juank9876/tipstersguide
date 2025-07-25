@@ -7,6 +7,7 @@ import DynamicStyle from '@/components/juankui/css-content'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
 import { createPageTitle, getPageSlugToIdMap } from '@/lib/utils'
 import { capitalize } from '@/utils/capitalize'
+import { AsideH2Index } from './aside-h2-index'
 //parse, 
 
 
@@ -55,7 +56,10 @@ export default async function Home() {
       settings={settings}
       pageProps={page}
     >
+      <div className='relative '>
 
+        <AsideH2Index html={page.html_content} />
+      </div>
       <HtmlRenderer html={page.html_content} cssContent={page.css_content} />
     </PreHomePage>
 

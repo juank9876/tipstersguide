@@ -97,7 +97,16 @@ export async function PrePost({ children, post }: { children: ReactNode, post: P
       {isParticles && <ParticlesFull />}
       <HeroPost {...post} />
 
-      <Section>
+      <Section style={{
+        background: "linear-gradient(to bottom, #24243e, #302b63, #f1f5f9)",
+      }}>
+        {/* Separador SVG decorativo para transición suave */}
+        <div className="w-full overflow-hidden -mb-3">
+          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-12">
+            <path fill="#f1f5f9" d="M0,0 C480,60 960,0 1440,60 L1440,60 L0,60 Z"></path>
+          </svg>
+        </div>
+
         {children}
         {/* Card de autor MeriStation */}
         {post.author_name && (

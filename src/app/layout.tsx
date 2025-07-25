@@ -66,7 +66,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           suppressHydrationWarning
         >
           <Providers>
-            <div className="flex h-full flex-col">
+            <div className="flex h-full flex-col min-h-screen">
               <Header />
               {children}
               <Footer settings={settings} />
