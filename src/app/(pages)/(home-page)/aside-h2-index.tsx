@@ -76,7 +76,7 @@ export function AsideH2Index({ html }: { html: string }) {
             `}
             style={{
                 transition: 'top 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1)',
-                top: isAtTop ? 'calc(100vh - 37vh)' : '50%',
+                top: isAtTop ? 'calc(100vh - 30vh)' : '50%',
                 transform: isAtTop ? 'translateY(0)' : 'translateY(-50%)',
             }}
         >

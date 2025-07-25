@@ -23,7 +23,11 @@ export function PreHomePage({ children, settings, pageProps }: HomePage) {
       {isParticles && <ParticlesFull />}
 
       <HeroHomePage {...props} />
-      <Section>
+      <Section
+      >
+
+
+
         <div className='flex max-w-[90vw] flex-col space-y-5 lg:max-w-[60vw]'>
           {children}
         </div>

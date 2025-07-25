@@ -4,19 +4,20 @@ import Atropos from 'atropos/react';
 
 const badges = [
     // IZQUIERDA
-    { name: 'betfair', offset: -5, className: 'top-0 left-10' },
-    { name: 'bwin', offset: 0, className: 'top-1/2 left-40 -translate-y-1/2' },
-    { name: 'play', offset: -3, className: 'bottom-0 left-10' },
+
 
     // DERECHA
-    { name: 'codere', offset: 5, className: 'top-0 right-10' },
-    { name: 'pokerstars', offset: 2, className: 'top-1/2 right-40 -translate-y-1/2' },
-    { name: 'luckia', offset: 3, className: 'bottom-0 right-10' },
+    { name: 'play', offset: -3, className: 'bottom-70 right-120' },
+    { name: 'betfair', offset: -5, className: 'bottom-120 right-90' },
+    { name: 'codere', offset: 5, className: 'bottom-120 right-30' },
+    { name: 'luckia', offset: 3, className: 'bottom-70 right-10' },
+    { name: 'pokerstars', offset: 2, className: 'bottom-20 right-30 ' },
+    { name: 'bwin', offset: 0, className: 'bottom-20 right-90 ' },
 ];
 
 export function AtroposCasinos() {
     return (
-        <div className="absolute inset-0 z-0 hidden lg:flex">
+        <div className="absolute inset-0 z-0 hidden lg:flex right-40 bottom-10">
             <Atropos
                 className="w-full h-full "
                 highlight={false}
@@ -38,5 +39,6 @@ export function AtroposCasinos() {
                 </div>
             </Atropos>
         </div>
+
     );
 }

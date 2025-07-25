@@ -13,24 +13,28 @@ type HomeProps = SiteSettings & Page
 export function HeroHomePage({ title, meta_title, meta_description, site_title, site_description }: HomeProps) {
 
   return (
-    <section id="hero" className="relative flex h-[50vh] w-full flex-col items-center justify-center overflow-hidden mb-10">
+    <section id="hero" className="relative flex h-[70vh] w-full flex-col items-center justify-center overflow-hidden ">
       <ParticlesFull />
       <VideoHero />
-      <div className="w-full flex h-full flex-col items-center justify-center bg-gradient-to-b from-[var(--color-primary-dark)] via-[var(--color-primary)] to-[var(--color-primary)] ">
-        <div className="m-0 w-full flex items-center justify-center  p-4 py-9 md:gap-9 md:px-8 lg:px-12 lg:py-20">
-
+      <div
+        className="w-full flex h-full flex-col items-center justify-end"
+        style={{
+          background: "linear-gradient(to right, #0f0c29, #302b63, #24243e)"
+        }}
+      >
+        <div className="m-0 w-full flex items-center justify-center">
           {
             <AtroposCasinos />
           }
-          <div className="flex flex-col w-full items-center justify-center space-y-2">
+          <div className="flex flex-col w-[60vw] items-start justify-start space-y-5">
             <div className=" group/badge duration-400 w-fit flex flex-row items-center justify-center rounded-full bg-gradient-to-b from-[var(--color-primary-semi-dark)] hover:to-[var(--color-accent)] px-5 transition to-[var(--color-primary)]">
               <Star size={18} className="mr-2 inline text-[var(--color-accent-light)]" />
               <p className="text-lg text-muted font-bold group-hover/badge:text-white">{site_title}</p>
             </div>
-            <h1 className="text-white text-center md:text-[64px] font-inter md:leading-[72px] font-bold mb-4 md:mt-0 mt-2 text-[34px] leading-[44px] mx-auto flex w-full max-w-[873px] flex-col items-center">
+            <h1 className="text-white text-start text-5xl max-w-[800px]">
               {site_title}
             </h1>
-            <p className="text-white text-center md:text-[20px] md:leading-[28px] font-normal md:px-[86px]">{site_description || meta_description}</p>
+            <p className="text-white text-start md:text-[20px] font-normal max-w-[800px]">{site_description || meta_description}</p>
 
             <div className="flex flex-row items-center justify-center space-x-5 lg:py-5">
               <ButtonRipple className="rounded-full">
@@ -42,14 +46,22 @@ export function HeroHomePage({ title, meta_title, meta_description, site_title, 
             </div>
           </div>
 
-          <div
-            className="h-[16px] w-full overflow-hidden rotate-180 absolute bottom-0 z-10 bg-transparent"
-            style={{
-              backgroundImage:
-                'url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTQ0IiBoZWlnaHQ9IjE3IiB2aWV3Qm94PSIwIDAgNTQ0IDE3IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik01NDMuNSAyLjM3MjA0TDUyOS42NjEgMTEuODYwNEw1MjIuMTQ4IDIuMzcyMDRMNDg4LjE0NCA1LjkzMDJMNDgyLjIxMyA4LjY5NzY1TDQ0OC42MDQgOC42OTc2NUw0NDIuNjczIDUuOTMwMkw0MjYuNDYxIDguNjk3NjZMNDA0LjcxNCAyLjM3MjA1TDM1NC40OTggMTEuODYwNUwzMzUuNTE5IDIuMzcyMDZMMzIyLjg2NiA1LjkzMDIxTDMxMy43NzIgMi4zNzIwNkwzMDIuMzA1IDE3TDI4MC41NTggNS45MzAyMkwyNDAuNjIzIC0zLjQ1NTY4ZS0wNUwxNzQuNTkxIDExLjg2MDVMMTU0LjQyNSAyLjM3MjA3TDg5LjU3OTcgMTQuMjMyNkw4NC44MzQ4IDUuOTMwMjNMNDcuNjY3MSAxNC4yMzI2TC03LjI5MzU4IC0xLjI4ODMzZS0wNUwtNTQuNzQxNyAxNC4yMzI2TC03Ni44ODQyIDIuMzcyMDlMLTg1Ljk3ODQgMTEuODYwNUwtMTAyLjE5IC00LjU4NzE2ZS0wNkwtMTIyLjM1NSAxNy4wMDAxTC0xMzIuMjQgNS45MzAyNUwtMTYxLjUgNS45NzkwMWUtMDdMLTEwMi4xOSAtNC41ODcxNmUtMDZMLTcuMjkzNTggLTEuMjg4MzNlLTA1TDI0MC42MjMgLTMuNDU1NjhlLTA1TDU0My41IC02LjEwMzUyZS0wNUw1NDMuNSAyLjM3MjA0WiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==")',
-              backgroundColor: "transparent",
-            }}
-          ></div>
+        </div>
+
+        <div className="relative w-full bottom-0 bg-transparent">
+          <div className="relative w-full bottom-0 rotate-180 bg-transparent">
+            <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="yes" viewBox="0 0 1000 100"><path d="M0 0v47.6l5-2c1 0 11 3 12 0 2 3 6-3 6 0 0-4 12 3 12 0 0 3 15-1 17 0 2-2 5-1 6 0 0-2 6 2 6 0s2 4 4 0c5 2 12-3 16 0 2-2 4-3 4 0 0 2 6-1 6 0 1 4 15-2 17 0h7c0 1 3-3 6 0h17c2 2 3 1 6 0h6c1-2 21-1 24 0 2 1 4 2 6 0 0-1 22 4 24 0 0 0 5-3 5 0 2-2 10 2 12 0 2 2 6 1 6 0 2 3 4-2 6 0 1 0 25-2 25 1l10-1c3 1 6 6 7 0 1 5 4-2 6 0 2-2 4 3 5 0h12c6 1 36 2 36 0 0 2 3 0 6 0h6c5-2 7 4 11 0 2 0 15 2 17 0h13c3-4 5 1 7 0h29c0-3 6 0 6 0h5c0 2 16-1 18 0 1 4 9-1 12 0s6-2 6 0c8-2 3 4 13 0h10c3 4 19 1 19 0 2 0 21 1 23-1 1 4 3-1 6 1 1 2 11-1 12-1 3 3 9 0 12 1 3-4 6 1 6 0h6c0-3 5 1 6-1 0 3 2 1 4 1 3 4 10-1 13 0 3-2 6-1 6 0 2 2 2 0 6 0 1-2 6 2 6 0 2 0 4 5 6 0h18c2 3 4 1 6 0l6-1c3 2 12 3 17 1 14 3 18 1 24 0 2-1 3 3 5 0 6 2 10-1 16 0 1 3 6 0 9 0 0-2 3 2 5 0 6-6 8 7 13 0 0-2 5 2 5 0 3 3 10 0 10 0 1 2 5-2 8 0 3-1 8 3 12 0h6c2 1 10 4 12 0h6c1-1 5 2 6 0 1 2 4-1 6 0 0-2 5 3 6-1 2 1 6 5 5 1 1 1 3-2 6 0 2-1 5 3 6 0 0 1 6 2 6 0 2 3 4-4 6 0 0-2 3 2 6 0 3 0 6 3 6 0 5 3 8-1 13 0 3-4 6 1 6 0h5c0-1 9 2 12 0 1-1 9 3 11 0h6c2 2 4 4 7 0 3 2 5-4 5-1 10 4 15-2 18 2 0-1 6 2 6-2 0 0 6-2 6 1 1 6 12 2 12 0 1 3 4-3 7 2 2-2 5 2 5 0 1 5 4-5 6 0 2-1 4 2 6 0 1 3 1 0 5 0V0H0Z" fill="#F1F5F9"></path></svg>
+          </div>
+
+          {
+            /*
+                      <div className="absolute top-27 left-0 w-full h-full bg-transparent">
+                        <svg data-name="Layer 1" fill="var(--color-primary)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                          <path d="M649.97 0L550.03 0 599.91 54.12 649.97 0z" className=""></path>
+                        </svg>
+                      </div>
+                      */
+          }
         </div>
       </div>
     </section>
