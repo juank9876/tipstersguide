@@ -98,7 +98,7 @@ export async function PrePost({ children, post }: { children: ReactNode, post: P
       <HeroPost {...post} />
 
       <Section style={{
-        background: "linear-gradient(to bottom, #24243e, #302b63, #f1f5f9)",
+
       }}>
         {/* Separador SVG decorativo para transición suave */}
         <div className="w-full overflow-hidden -mb-3">
@@ -107,7 +107,9 @@ export async function PrePost({ children, post }: { children: ReactNode, post: P
           </svg>
         </div>
 
-        {children}
+        <div className='flex flex-col items-start justify-start bg-white w-full rounded-lg px-10 py-5'>
+          {children}
+        </div>
         {/* Card de autor MeriStation */}
         {post.author_name && (
           <AuthorCard

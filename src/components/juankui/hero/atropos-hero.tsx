@@ -17,7 +17,7 @@ const badges = [
 
 export function AtroposCasinos() {
     return (
-        <div className="absolute inset-0 z-0 hidden lg:flex right-40 bottom-10">
+        <div className="absolute inset-0 z-0 hidden lg:flex right-40 bottom-20">
             <Atropos
                 className="w-full h-full "
                 highlight={false}

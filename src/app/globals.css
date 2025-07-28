@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -66,7 +68,18 @@
       background-position: bottom center;
     }
   }
-}
+
+  --animate-meteor: meteor 5s linear infinite
+;
+  @keyframes meteor {
+  0% {
+    transform: rotate(var(--angle)) translateX(0);
+    opacity: 1;}
+  70% {
+    opacity: 1;}
+  100% {
+    transform: rotate(var(--angle)) translateX(-500px);
+    opacity: 0;}}}
 
 :root {
   --radius: 0.625rem;
@@ -156,8 +169,6 @@ body {
 .bg-gradient-diagonal {
   background-image: linear-gradient(45deg, var(--color-primary-light), var(--color-secondary-light));
 }
-
-
 
 .theme-dark {
   --background: oklch(0.145 0 0);
@@ -275,7 +286,6 @@ body {
     @apply text-white
   }
 
-
 }
 
 .bg-gradient-dark {
@@ -311,4 +321,13 @@ body {
 
 *::-webkit-scrollbar-track {
   background-color: transparent;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

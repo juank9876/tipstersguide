@@ -119,7 +119,7 @@ export default async function Page({
         const post = data.post
 
         return (
-            <PrePost post={post}>
+            <PrePost post={post} >
                 <HtmlRenderer html={post.html_content} cssContent={post.css_content} />
             </PrePost>
         )
@@ -138,7 +138,7 @@ export default async function Page({
                     </span>
                 </PreCategory>
             ) : (
-                <PreCategory category={category} className='flex w-[90vw] grid-cols-2 flex-col justify-center space-y-5 rounded-lg lg:grid lg:w-[60vw] lg:gap-5'>
+                <PreCategory category={category} className='flex w-[90vw] grid-cols-4 flex-col justify-center space-y-5 rounded-lg lg:grid lg:w-[70vw] lg:gap-5'>
 
                     {posts.map((post) => (
                         <CardPostCategory key={post.id} post={post} category={category} />

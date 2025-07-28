@@ -44,7 +44,7 @@ function FooterLinkList({ title, links }: { title: string, links: { href: string
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm text-slate-100 hover:text-slate-100 transition-colors"
+                  className="text-xs text-slate-100 hover:text-slate-100 transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -142,7 +142,7 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
       <div className="mx-auto w-[70vw] px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* Brand Section */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 justify-between flex flex-col items-center ">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 {settings.site_logo && (
@@ -152,14 +152,17 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
                     className="h-8 w-auto"
                   />
                 )}
-                <h3 className="text-xl font-bold text-slate-100">
-                  {settings.site_title}
-                </h3>
+                {!settings.site_logo && (
+                  <h3 className="text-xl font-bold text-slate-100">
+                    {settings.site_title}
+                  </h3>
+                )}
               </div>
               <p className="text-sm text-slate-100 leading-relaxed">
                 {settings.site_description}
               </p>
             </div>
+            <FooterNewsletter />
           </div>
 
           {/* Navigation Links dinámicos */}
@@ -196,7 +199,7 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
             </h4>
             <div className="space-y-4 flex flex-col">
               <FooterSocialIcons />
-              <FooterNewsletter />
+
             </div>
           </div>
 

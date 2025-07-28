@@ -117,12 +117,14 @@ export function transformCard(el: Element, options: HTMLReactParserOptions) {
 
   return (
     <div className='relative flex flex-col '>
-      <div className="absolute top-0 left-0 z-50">
-        <div className="size-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-white flex items-center justify-center text-3xl font-bold rounded-full shadow-lg">
-          {badgeContent || '1'}
+      {badgeContent &&
+        <div className="absolute top-0 left-0 z-50">
+          <div className="size-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-white flex items-center justify-center text-3xl font-bold rounded-full shadow-lg">
+            {badgeContent}
+          </div>
         </div>
-      </div>
-      <CardShine className={`mx-5 relative my-5 flex w-full max-w-[350px] overflow-hidden transition duration-500 hover:bg-gray-50 ${el.attribs?.class || ''}`}>
+      }
+      <CardShine className={`mx-5 relative text-white my-5 flex w-full max-w-[350px] overflow-hidden transition duration-500 bg-[#171717] ${el.attribs?.class || ''}`}>
         {domToReact(contentChildren, options)}
       </CardShine>
     </div>
@@ -130,6 +132,21 @@ export function transformCard(el: Element, options: HTMLReactParserOptions) {
 }
 
 export function transformCardBody(el: Element, options: HTMLReactParserOptions) {
+  const children = el.children as Element[];
+
+  const hasH5 = children.some(child => child.type === 'tag' && child.name === 'h5');
+  const hasImg = children.some(child => child.type === 'tag' && child.name === 'img');
+
+  if (hasImg) {
+    // Renderiza algo especial si hay img
+    return (
+      <div className={`flex flex-col space-y-3 border-2 border-green-500 ${el.attribs?.class || ''}`}>
+        <span className="text-green-600 font-bold">Contiene Imagen</span>
+        {domToReact(el.children as DOMNode[], options)}
+      </div>
+    );
+  }
+
   return (
     <div className={`flex flex-col space-y-3 ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
@@ -204,7 +221,7 @@ export function transformContainer(el: Element, options: HTMLReactParserOptions)
 
 export function transformSection(el: Element, options: HTMLReactParserOptions) {
   return (
-    <section className={`bg-white rounded-lg`}>
+    <section className={`bg-white rounded-lg px-5 py-5`}>
       {domToReact(el.children as DOMNode[], options)}
     </section>
   )
@@ -273,14 +290,8 @@ export function transformH3(el: Element, options: HTMLReactParserOptions) {
 
 export function transformLi(el: Element, options: HTMLReactParserOptions) {
   return (
-    <li className={`text-p-custom text-muted-foreground relative mt-2 pl-6 leading-relaxed ${el.attribs?.class || ''}`}>
-      <span className="absolute left-0 top-1.5">
-        <Circle className="size-3 text-[var(--color-primary)]" />
-      </span>
-
-      <div className={`prose prose-zinc dark:prose-invert max-w-none [&>*]:inline [&>code]:inline [&>strong]:inline [&>strong]:font-bold ${el.attribs?.class || ''}`}>
-        {domToReact(el.children as DOMNode[], options)}
-      </div>
+    <li className={`list-inside list-disc pl-5 text-p-custom text-muted-foreground relative mt-2   ${el.attribs?.class || ''}`}>
+      {domToReact(el.children as DOMNode[], options)}
     </li>
   )
 }
