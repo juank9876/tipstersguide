@@ -139,8 +139,8 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
   return (
     <footer className="w-full bg-[var(--color-primary-dark)]">
       {/* Main Footer Content */}
-      <div className="mx-auto w-[70vw] px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+      <div className="mx-auto w-[70vw] px-4 py-12 sm:px-6 lg:px-8 flex justify-center items-center">
+        <div className="flex flex-row justify-between items-start w-full">
           {/* Brand Section */}
           <div className="lg:col-span-2 justify-between flex flex-col items-center ">
             <div className="space-y-4">

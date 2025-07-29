@@ -61,10 +61,7 @@ const rules: TransformerRule[] = [
 
   { className: 'feature-item', transformer: transformFeatureItem },
   { className: 'feature-list', transformer: transformFeatureList },
-  { className: 'bonuses', transformer: transformSectionBonuses },
-  { className: 'bonus-list', transformer: transformBonusList },
-  { className: 'bonus-item', transformer: transformBonusItem },
-  { className: 'bonus-link', transformer: transformBonusLink },
+
   { className: 'btn-submit', transformer: transformBtnSubmit },
 
   //Tags HTML

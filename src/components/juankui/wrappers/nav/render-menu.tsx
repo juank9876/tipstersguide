@@ -2,12 +2,14 @@
 
 import { navPosition } from '@/config/options'
 import { capitalize } from '@/utils/capitalize'
-import { Category, NavItemType } from '@/types/types';
-import { ChevronRight, ChevronUp } from 'lucide-react';
+import { NavItemType } from '@/types/types';
+import { ChevronUp } from 'lucide-react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from '@/components/juankui/optionals/link';
-import { ReactNode } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import path from 'path';
+import { NavLink } from './nav-link';
 
 type ListItemProps = {
   title: string;
@@ -18,6 +20,8 @@ type ListItemProps = {
   childCategories?: NavItemType[]
   parentSlug?: string
 }
+
+
 
 function ListItem({ title, href, className, isChild = false, childCategories, parentSlug }: ListItemProps) {
   const hasSubcategories = childCategories && childCategories.length > 0;
@@ -86,12 +90,11 @@ export function RenderMenu({ normalizedItems }: { normalizedItems: NavItemType[]
                 </div>
               </>
             ) : (
-              <Link
-                href={`${item.url}`}
+              <NavLink
+                href={item.url}
                 className="px-4 py-3 text-base font-bold tracking-wide text-white transition-colors duration-150 hover:bg-[var(--color-accent-dark)] rounded-lg"
-              >
-                {item.title}
-              </Link>
+                label={item.title}
+              />
             )}
           </li>
         ))}

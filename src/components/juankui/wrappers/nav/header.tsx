@@ -6,9 +6,12 @@ import { contextSiteSettings } from '@/app/context/getSiteSettings'
 import { Logo } from './logo'
 import { RenderMenu } from './render-menu'
 import { NavMobile } from './nav-mobile'
+import { headers } from 'next/headers';
+
 
 
 export async function Header() {
+  const headersList = await headers();
   const rawNavItems = await fetchMenu()
   const navItems = rawNavItems.filter(item => item.status === 'active')
   const sortedItems = navItems.sort((a, b) => Number(a.sort_order) - Number(b.sort_order))
