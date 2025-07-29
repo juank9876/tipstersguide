@@ -449,3 +449,18 @@ export function transformBlockquote(el: Element, options: HTMLReactParserOptions
     </blockquote>
   )
 }
+
+export function transformSvg(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs);
+
+  return (
+    <svg
+      {...attribs}
+      fill="var(--color-accent)"
+      className={`relative rounded-lg ${attribs.className || ''} ${el.attribs?.class || ''}`}
+    >
+      {domToReact(el.children as DOMNode[], options)}
+
+    </svg>
+  )
+}

@@ -165,28 +165,29 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
             <FooterNewsletter />
           </div>
 
-          {/* Navigation Links dinámicos */}
-          <div className="lg:col-span-2">
-            <FooterLinkList
-              title="Navegación"
-              links={menuItems.filter(item => item.status === 'active').map(item => ({
-                href: item.url,
-                label: item.title
-              }))}
-            />
-          </div>
+          {/* Navigation Links dinámicos */ menuItems.length > 0 && (
+            <div className="lg:col-span-2">
+              <FooterLinkList
+                title="Navegación"
+                links={menuItems.filter(item => item.status === 'active').map(item => ({
+                  href: item.url,
+                  label: item.title
+                }))}
+              />
+            </div>
+          )}
 
-          {/* Categorías dinámicas */}
-          <div className="lg:col-span-2">
-            <FooterLinkList
-              title="Categorías"
-              links={categoriesItems.map(cat => ({
-                href: `/categories/${cat.slug}`,
-                label: cat.name
-              }))}
-            />
-          </div>
-
+          {/* Categorías dinámicas */ categoriesItems.length > 0 && (
+            <div className="lg:col-span-2">
+              <FooterLinkList
+                title="Categorías"
+                links={categoriesItems.map(cat => ({
+                  href: `/categories/${cat.slug}`,
+                  label: cat.name
+                }))}
+              />
+            </div>
+          )}
           {/* Legal & Support */}
           <div className="lg:col-span-2">
             <FooterLinkList title="Soporte" links={SUPPORT_LINKS} />

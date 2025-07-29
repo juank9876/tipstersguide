@@ -4,7 +4,7 @@
 
 export const debug = {
     brandlisty: {
-        url: true,
+        url: false,
         response: false,
         html: false,
     },
