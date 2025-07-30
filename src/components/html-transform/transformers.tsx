@@ -280,7 +280,7 @@ export function transformH3(el: Element, options: HTMLReactParserOptions) {
 
   return (
     <div className={`mt-8 flex flex-row items-center justify-start space-x-3 ${el.attribs?.class || ''}`}>
-      <RandomIcon className='text--[var(--color-accent-dark)] mb-0 pb-0' />
+      <RandomIcon className='text-[var(--color-accent-dark)] mb-0 pb-0' />
       <h3 className='text-[var(--color-accent-dark)]'>
         {domToReact(el.children as DOMNode[], options)}
       </h3>
@@ -457,6 +457,7 @@ export function transformSvg(el: Element, options: HTMLReactParserOptions) {
     <svg
       {...attribs}
       fill="var(--color-accent)"
+      stroke='#fff'
       className={`relative rounded-lg ${attribs.className || ''} ${el.attribs?.class || ''}`}
     >
       {domToReact(el.children as DOMNode[], options)}
