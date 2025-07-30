@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { Link } from '../../optionals/link';
 
 type NavLinkProps = {
     href: string;
-    label: string;
+    children: ReactNode;
     className?: string;
 };
 
-export function NavLink({ href, label, className }: NavLinkProps) {
+export function NavLink({ href, children, className }: NavLinkProps) {
     const [baseUrl, setBaseUrl] = useState<string | null>(null);
 
     // Solo se ejecuta en cliente después del primer render
@@ -19,7 +19,7 @@ export function NavLink({ href, label, className }: NavLinkProps) {
         // Mientras no tenemos baseUrl, renderiza un Link simple (o un fallback)
         return (
             <Link className={className} href={href}>
-                {label}
+                {children}
             </Link>
         );
     }
@@ -39,14 +39,14 @@ export function NavLink({ href, label, className }: NavLinkProps) {
             console.log('External link detected:', parsedHref.toString());
             return (
                 <a className={className} href={parsedHref.toString()} target="_blank" rel="noopener noreferrer">
-                    {label}
+                    {children}
                 </a>
             );
         } else if (isLocalDomain) {
             console.log('Internal link detected:', parsedHref.pathname.toString());
             return (
                 <Link className={className} href={parsedHref.pathname}>
-                    {label}
+                    {children}
                 </Link>
             );
         }
@@ -56,7 +56,7 @@ export function NavLink({ href, label, className }: NavLinkProps) {
         console.log('Normal link detected:', href);
         return (
             <Link className={className} href={href}>
-                {label}
+                {children}
             </Link>
 
         )

@@ -6,9 +6,7 @@ import { NavItemType } from '@/types/types';
 import { ChevronUp } from 'lucide-react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from '@/components/juankui/optionals/link';
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import path from 'path';
+import { useState } from 'react';
 import { NavLink } from './nav-link';
 
 type ListItemProps = {
@@ -34,7 +32,7 @@ function ListItem({ title, href, className, isChild = false, childCategories, pa
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
     >
-      <Link
+      <NavLink
         href={parentSlug ? `${parentSlug}${href}` : '/categories/' + href}
         className={`flex items-center px-4 py-3 text-md text-black hover:bg-[var(--color-secondary-light)] rounded-lg font-semibold transition-colors duration-150 ${isChild ? 'pl-8 text-sm' : ''}`}
       >
@@ -42,7 +40,7 @@ function ListItem({ title, href, className, isChild = false, childCategories, pa
         {hasSubcategories && (
           <ChevronUp className={`text-black ml-2 h-4 w-4 transition-transform duration-200 ${open ? 'rotate-90' : ''}`} />
         )}
-      </Link>
+      </NavLink>
       {/* Renderizar subcategorías si existen */}
       {hasSubcategories && (
         <ul className={`absolute right-full top-0 mt-0 ml-0 w-[220px] bg-white rounded-lg shadow-lg z-30 ${open ? 'block' : 'hidden'}`}>
@@ -93,8 +91,10 @@ export function RenderMenu({ normalizedItems }: { normalizedItems: NavItemType[]
               <NavLink
                 href={item.url}
                 className="px-4 py-3 text-base font-bold tracking-wide text-white transition-colors duration-150 hover:bg-[var(--color-accent-dark)] rounded-lg"
-                label={item.title}
-              />
+              //label={item.title}
+              >
+                {item.title}
+              </NavLink>
             )}
           </li>
         ))}
