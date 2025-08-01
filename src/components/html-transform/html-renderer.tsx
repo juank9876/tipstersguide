@@ -5,7 +5,7 @@ import { debugLog } from '@/config/debug-log'
 import { debug } from '@/config/debug-log'
 
 
-export default function HtmlRenderer({ html, cssContent }: { html: string, cssContent: string | null }) {
+export default function HtmlRenderer({ html, cssContent }: { html: string, cssContent: string | undefined }) {
   debugLog(debug.htmlContent, html)
   return (
     <>

@@ -3,7 +3,7 @@ import { debug, debugLog } from '@/config/debug-log';
 import { useEffect } from 'react';
 
 type DynamicStyleProps = {
-    cssContent: string | null;
+    cssContent: string | undefined;
 };
 
 const DynamicStyle = ({ cssContent }: DynamicStyleProps) => {

@@ -19,6 +19,8 @@ export const debug = {
     postOrCategoryPermalink: false,
     currentPostOrCategoryUrl: false,
     menu: false,
+
+    createMetadata: false,
 }
 
 

@@ -5,19 +5,18 @@ import { ShineBorder } from "@/components/magicui/shine-border"
 import { Card, CardContent } from "@/components/ui/card"
 import { createPageTitle, formatDate } from "@/lib/utils"
 import { capitalize } from "@/utils/capitalize"
+import { Metadata } from "next"
+import { createMetadata } from "../seo/createMetadata"
 
 
-export async function generateMetadata() {
-  return {
-    title: await createPageTitle("Categories"),
-    description: capitalize("This is the categories site"),
-  }
+export async function generateMetadata(): Promise<Metadata> {
+  return await createMetadata();
 }
 
 export default async function CategoriesPage() {
   const categories = await fetchCategories()
   if (categories.length === 0) {
-    return <main className="flex flex-col w-full h-screen items-center justify-center">No categories found</main>
+    return <main className="flex flex-col w-full flex-1 items-center justify-center">No categories found</main>
   }
   return (
     <main className={`flex w-full flex-1 flex-col items-center justify-center pb-10`}>

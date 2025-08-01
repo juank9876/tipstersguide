@@ -474,7 +474,7 @@ export function transformSvg(el: Element, options: HTMLReactParserOptions) {
   return (
     <svg
       {...attribs}
-      fill="var(--color-accent)"
+      fill="#000"
       stroke='#fff'
       className={`relative rounded-lg ${attribs.className || ''} ${el.attribs?.class || ''}`}
     >

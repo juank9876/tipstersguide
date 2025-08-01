@@ -1,7 +1,7 @@
 import { debug, debugLog } from "@/config/debug-log";
-import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
+import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings, Tag } from "@/types/types";
 
-type MethodType = "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink";
+type MethodType = "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink" | "tags" | "tag";
 
 interface FetcherParams {
   method: MethodType;
@@ -79,5 +79,12 @@ export async function fetchAuthorById(id: string): Promise<Author> {
 type PermalinkType = "category" | "post"
 export async function fetchPermalink(id: string, type: PermalinkType): Promise<PermalinkData> {
   return fetcher<PermalinkData>({ method: "permalink", id, type });
+}
+
+export async function fetchTags() {
+  return fetcher<Tag[]>({ method: "tags" });
+}
+export async function fetchTagById(id: string): Promise<Tag> {
+  return fetcher<Tag>({ method: "tag", id });
 }
 

@@ -7,12 +7,17 @@ import DynamicStyle from '@/components/juankui/css-content'
 import { PreHomePage } from '@/components/juankui/pre-rendered/pre-home'
 import { createPageTitle, getPageSlugToIdMap } from '@/lib/utils'
 import { capitalize } from '@/utils/capitalize'
-import { AsideH2Index } from './aside-h2-index'
-//parse, 
+import { AsideH2Index } from './components/aside-h2-index'
+import { Metadata } from 'next'
+import { createMetadata } from '@/app/seo/createMetadata'
 
+
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getHomePageFromParams();
+  return await createMetadata(page);
+}
 
 async function getHomePageFromParams() {
-
   const map = await getPageSlugToIdMap();
 
   let slug = "/";
@@ -31,19 +36,6 @@ async function getHomePageFromParams() {
   }
 */
   return homePage
-}
-
-export async function generateMetadata() {
-  const page = await getHomePageFromParams()
-  try {
-    return {
-      title: await createPageTitle(page?.title || ''),
-      description: capitalize(page?.meta_description || ''),
-    }
-  } catch (error) {
-    console.error('Error generating metadata:', error)
-    return <NotFound />
-  }
 }
 
 export default async function Home() {

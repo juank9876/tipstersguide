@@ -18,9 +18,11 @@ export function AsideH2Index({ html }: { html: string }) {
     useEffect(() => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, "text/html");
-        const h2Array = Array.from(doc.querySelectorAll("h2")).map((el) => ({
-            text: el.textContent?.trim() || ""
-        }));
+        const h2Array = Array.from(doc.querySelectorAll("h2"))
+            .map(el => el.textContent?.trim() || "")
+            .filter(text => text !== "")  // <-- solo los que no están vacíos
+            .map(text => ({ text }));
+
         setHeadings(h2Array);
     }, [html]);
 

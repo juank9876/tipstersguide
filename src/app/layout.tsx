@@ -8,7 +8,50 @@ import { hexToOklch } from "@/utils/hex-to-oklch";
 import { Providers } from "./providers";
 import Head from "next/head";
 import { generateFonts } from "@/utils/fonts";
+import { Metadata } from "next";
 
+export async function generateMetadata(): Promise<Metadata> {
+  const settings = await fetchSiteSettings()
+
+  return {
+    title: settings.site_title,
+    description: settings.site_description,
+    keywords: settings.meta_keywords,
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://your-domain.com'),
+
+    // OpenGraph metadata
+    openGraph: {
+      title: settings.meta_title || settings.site_title,
+      description: settings.meta_description || settings.site_description,
+      type: 'website',
+      siteName: settings.site_title,
+    },
+
+    // Twitter metadata
+    twitter: {
+      card: 'summary_large_image',
+      title: settings.meta_title || settings.site_title,
+      description: settings.meta_description || settings.site_description,
+    },
+
+    icons: [
+      {
+        rel: "icon",
+        url: settings.favicon || "/favicon.svg",
+        sizes: "32x32",
+        type: "image/png"
+      }
+    ],
+
+    // Additional metadata
+    other: {
+      'google-analytics': settings.ga_tracking_id || '',
+      'facebook-pixel': settings.facebook_pixel || '',
+      'custom-css': settings.custom_css || '',
+      'custom-js': settings.custom_js || '',
+    }
+  }
+}
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const font = await generateFonts();
@@ -29,12 +72,14 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning className={`${font.variable} font-sans`}>
-        <Head>
-          <title>{settings.site_title || "Welcome to our site"}</title>
-          <meta name="description" content={settings.meta_description} />
-          {/* puedes usar settings.favicon, site_logo, etc */}
-          <link rel="icon" href={settings.favicon || "/vercel.svg"} />
-        </Head>
+        <head>
+          {settings.schema_data && (
+            <script
+              type="application/ld+json"
+              dangerouslySetInnerHTML={{ __html: JSON.stringify(settings.schema_data) }}
+            />
+          )}
+        </head>
         <body
           style={{
             '--color-primary-light': primaryLightColor,

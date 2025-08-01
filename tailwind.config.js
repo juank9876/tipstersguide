@@ -1,13 +1,120 @@
-const colors = [
-  'red', 'green', 'blue', 'yellow', 'cyan', 'purple', 'pink', 'orange', 'lime', 'teal', 'indigo', 'gray'
-];
-const shades = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'];
-
 module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   safelist: [
+    // Spacing utilities
+    ...Array.from({ length: 32 }, (_, i) => `p-${i}`),
+    ...Array.from({ length: 32 }, (_, i) => `m-${i}`),
+    ...Array.from({ length: 32 }, (_, i) => `gap-${i}`),
+
+    // Flexbox & Grid
+    'flex',
+    'flex-row',
+    'flex-col',
+    'grid',
+    'grid-cols-1',
+    'grid-cols-2',
+    'grid-cols-3',
+    'grid-cols-4',
+    'items-center',
+    'justify-center',
+    'justify-between',
+    'justify-around',
+
+    // Width & Height
+    ...Array.from({ length: 12 }, (_, i) => `w-${i}/12`),
+    ...Array.from({ length: 6 }, (_, i) => `w-${i}/6`),
+    ...Array.from({ length: 4 }, (_, i) => `w-${i}/4`),
+    'w-full',
+    'w-screen',
+    'h-full',
+    'h-screen',
+
+    // Typography
+    'text-xs',
+    'text-sm',
+    'text-base',
+    'text-lg',
+    'text-xl',
+    'text-2xl',
+    'text-3xl',
+    'font-normal',
+    'font-medium',
+    'font-semibold',
+    'font-bold',
+
+    // Borders
+    'rounded-sm',
+    'rounded',
+    'rounded-md',
+    'rounded-lg',
+    'rounded-xl',
+    'rounded-2xl',
+    'rounded-full',
+
+    // Shadows
+    'shadow-sm',
+    'shadow',
+    'shadow-md',
+    'shadow-lg',
+    'shadow-xl',
+    'shadow-2xl',
+
+    // Opacity & Transitions
+    'opacity-0',
+    'opacity-25',
+    'opacity-50',
+    'opacity-75',
+    'opacity-100',
+    'transition',
+    'duration-100',
+    'duration-200',
+    'duration-300',
+    'duration-500',
+
+    // Hover states
+    'hover:scale-95',
+    'hover:scale-100',
+    'hover:scale-105',
+    'hover:opacity-75',
+    'hover:opacity-100',
+
+    // Z-index
+    'z-0',
+    'z-10',
+    'z-20',
+    'z-30',
+    'z-40',
+    'z-50',
+
+    // Position
+    'relative',
+    'absolute',
+    'fixed',
+    'sticky',
+    'top-0',
+    'right-0',
+    'bottom-0',
+    'left-0',
+
+    // Display
+    'block',
+    'inline-block',
+    'inline',
+    'hidden',
+
+    // Container
+    'container',
+    'mx-auto',
+    'px-4',
+    'py-4',
+
+    // Overflow
+    'overflow-hidden',
+    'overflow-x-auto',
+    'overflow-y-auto',
+
     "bg-red-50",
     "text-red-50",
     "hover:bg-red-50",

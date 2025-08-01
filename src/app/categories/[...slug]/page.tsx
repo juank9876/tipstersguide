@@ -10,7 +10,24 @@ import { CardPostCategory } from '@/components/juankui/card-post-category'
 import { Category, Post } from '@/types/types'
 import { debug } from '@/config/debug-log'
 import { debugLog } from '@/config/debug-log'
-import { contextSiteSettings } from '@/app/context/getSiteSettings'
+
+export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }) {
+    const { slug = [] } = await params
+
+    const data = await getDataFromParams(slug)
+
+    if (data.type === 'post') {
+        return {
+            title: await createPageTitle(data.post.meta_title, data.post.title),
+            description: capitalize(data.post.meta_description) || data.post.excerpt || '',
+        }
+    }
+
+    return {
+        title: await createPageTitle(data.category.meta_title, data.category.name),
+        description: capitalize(data.category.meta_description) || data.category.description || '',
+    }
+}
 
 /** Decide si es un post o categoría y obtiene los datos */
 type RouteData =
@@ -79,32 +96,6 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
     }
 
     notFound()
-}
-
-export async function generateMetadata({ params }: { params: Promise<{ slug?: string[] }> }) {
-    const { slug = [] } = await params
-    const settings = await contextSiteSettings()
-    try {
-        const data = await getDataFromParams(slug)
-
-        if (data.type === 'post') {
-            return {
-                title: await createPageTitle(data.post.title),
-                description: capitalize(data.post.excerpt),
-            }
-        }
-
-        return {
-            title: await createPageTitle(data.category.name),
-            description: capitalize(data.category.description),
-        }
-    } catch (error) {
-        // Silenciosamente devuelve metadatos vacíos si hay 404
-        return {
-            title: 'Contenido no encontrado',
-            description: 'Lo que buscas ya no está aquí.',
-        }
-    }
 }
 
 export default async function Page({
