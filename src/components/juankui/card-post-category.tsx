@@ -12,60 +12,60 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
   return (
     <>
       {/*Card para PC*/}
-      <Card className="duration-400 bg-[var(--color-primary-dark)] relative hidden h-full overflow-hidden border-none p-0 shadow-none transition lg:flex">
+      <Card className="group relative h-full overflow-hidden border-none p-0 shadow-none transition-all duration-300 hover:scale-[1.02]">
         <Link href={`${categoryUrl}/${post.slug}`} className="h-full w-full">
           <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
           <div
-            className="h-full relative w-full bg-cover bg-center"
+            className="relative h-full w-full bg-cover bg-center transition-transform duration-300"
             style={{
               backgroundImage: `url(${post.featured_image || "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop"})`,
             }}
           >
-            {/* Overlay oscuro con filtro */}
-            <div className="backdrop-blur-xs absolute inset-0 h-full bg-black/70"></div>
-            <CardContent className="relative z-10 flex flex-col justify-between p-5 text-white h-[350px]">
-              <div className="itju-center flex h-full flex-col overflow-hidden rounded">
-                {/* 
-                <div className="relative mb-0 h-[200px] w-[300px] overflow-hidden rounded-lg">
-                  <Image
-                    src={
-                      post.featured_image ||
-                      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=400&fit=crop"
-                    }
-                    alt={post.title}
-                    fill
-                    className="aspect-square object-cover"
-                  />
-                </div>
-                          Imagen izquierda con altura completa */}
-                {/* Contenido derecho con altura igual */}
-                <div className="flex flex-1 flex-col justify-start px-6 py-3 h-full">
-                  <h2 className="mb-0 text-start text-2xl font-bold text-white">{decodeHtmlEntities(limitCharacters(post.title, 40))}</h2>
-                  <p className="text-slate-200 mb-0 pb-0 text-sm font-bold">{formatDate(post.published_at)}</p>
-                  <p className="text-slate-200 text-sm">{decodeHtmlEntities(limitCharacters(post.excerpt, 150))}</p>
-                </div>
+            {/* Overlay with blur */}
+            <div className="absolute inset-0 h-full bg-gradient-to-t from-black/90 via-black/70 to-black/30 backdrop-blur-[2px]"></div>
 
-                <div className=" px-5 flex flex-row items-center justify-start space-x-3  py-3 bg-gradient-to-br from-[var(--color-accent-dark)] to-[var(--color-accent)] border border-[var(--color-accent-light)] rounded-lg">
-                  <div className=" size-10 relative overflow-hidden rounded-full">
+            <CardContent className="relative z-10 flex h-full flex-col justify-between p-4 sm:p-5 md:p-6">
+              {/* Main Content */}
+              <div className="flex h-full flex-col space-y-4">
+                {/* Title and Date */}
+                <div className='bg-gradient-to-br from-[var(--color-primary-dark)] to-[var(--color-primary-semi-dark)] px-3 backdrop-blur-sm rounded-full border border-[var(--color-primary)] w-fit'>
+                  <p className="text-xs text-gray-300 sm:text-sm">
+                    {formatDate(post.published_at)}
+                  </p>
+
+                </div>
+                <h2 className="text-xl font-bold text-start text-white sm:text-2xl md:text-3xl">
+                  {decodeHtmlEntities(limitCharacters(post.title, 40))}
+                </h2>
+
+                {/* Excerpt - Hidden on mobile */}
+                <p className="hidden text-sm text-gray-300 sm:line-clamp-3 md:text-base">
+                  {decodeHtmlEntities(limitCharacters(post.excerpt, 150))}
+                </p>
+              </div>
+
+              {/* Author Info */}
+              <div className="mt-4 flex items-center justify-between rounded-lg bg-white/10 p-3 backdrop-blur-sm">
+                <div className="flex items-center space-x-3">
+                  <div className="relative h-8 w-8 overflow-hidden rounded-full border-2 border-purple-400 sm:h-10 sm:w-10">
                     <Image
-                      src={
-                        post.author_avatar ||
-                        `https://api.dicebear.com/7.x/lorelei/svg?seed=${post.author_name || "default"}`
-                      }
-                      alt={post.id}
+                      src={post.author_avatar || `https://api.dicebear.com/7.x/lorelei/svg?seed=${post.author_name || "default"}`}
+                      alt={post.author_name}
                       fill
                       className="object-cover"
                     />
                   </div>
-                  <div className="flex flex-row items-center gap-2 text-xs text-white">
-                    <span className='text-xs font-bold'>{formatDate(post.published_at)}</span>
-                    <span>·</span>
-                    <span className='text-xs'>{post.author_name.toUpperCase()}</span>
+                  <div className="flex flex-col">
+                    <span className="text-xs font-medium text-white sm:text-sm">
+                      {post.author_name}
+                    </span>
+                    <span className="text-xs text-gray-300">
+                      {formatDate(post.published_at)}
+                    </span>
                   </div>
                 </div>
               </div>
             </CardContent>
-
           </div>
         </Link>
       </Card>

@@ -213,7 +213,15 @@ export function transformTextElement(el: Element, options: HTMLReactParserOption
 
 export function transformContainer(el: Element, options: HTMLReactParserOptions) {
   return (
-    <div className={`border-primary shadow-lg flex flex-col justify-center items-center bg-white rounded-lg p-3 sm:px-4 sm:py-4 md:px-6 md:py-4 lg:px-8 lg:py-4 ${el.attribs?.class || ''}`}>
+    <div className={`border-primary shadow-lg flex flex-col justify-center items-center  rounded-lg p-3 sm:px-4 sm:py-4 md:px-6 md:py-4 lg:px-8 lg:py-4 ${el.attribs?.class || ''}`}>
+      {domToReact(el.children as DOMNode[], options)}
+    </div>
+  )
+}
+
+export function transformDiv(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <div className={`${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </div>
   )
@@ -221,7 +229,7 @@ export function transformContainer(el: Element, options: HTMLReactParserOptions)
 
 export function transformSection(el: Element, options: HTMLReactParserOptions) {
   return (
-    <section className={`bg-white rounded-lg px-5 py-5`}>
+    <section className={` rounded-lg px-5 py-5 ${el.attribs?.class || ''}`}>
       {domToReact(el.children as DOMNode[], options)}
     </section>
   )
@@ -257,8 +265,18 @@ export function transformImg(el: Element) {
 }
 
 export function transformH2(el: Element, options: HTMLReactParserOptions) {
+  // Check if element has any text content
+  const hasContent = el.children.some(child =>
+    (child.type === 'text' && child.data.trim() !== '') ||
+    (child.type === 'tag' && child.children?.length > 0)
+  );
+
+  // Return null if no content
+  if (!hasContent) return null;
+
   const icons = [ArrowRight, Star, Sparkles, Flame, Bolt, Dice1Icon, Dice2Icon, Dice3Icon, Dice4Icon, Dice5Icon, Dice6Icon]
   const RandomIcon = icons[Math.floor(Math.random() * icons.length)]
+
   return (
     <div className={`flex flex-row space-x-5 py-8 items-center justify-start ${el.attribs?.class || ''}`}>
       <div className='bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)] p-4 rounded-xl'>

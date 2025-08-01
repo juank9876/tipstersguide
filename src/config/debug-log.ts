@@ -9,6 +9,10 @@ export const debug = {
         html: false,
     },
     fetcher: false,
+    fetchPages: false,
+    fetchPosts: false,
+    fetchCategories: false,
+
     pages: false,
     htmlContent: false,
     cssContent: false,

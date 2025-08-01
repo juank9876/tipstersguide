@@ -1,4 +1,3 @@
-import { Onest, Poppins } from "next/font/google";
 import "./globals.css";
 import 'atropos/css'
 import { Header } from "@/components/juankui/wrappers/nav/header";
@@ -8,19 +7,11 @@ import { ViewTransitions } from 'next-view-transitions'
 import { hexToOklch } from "@/utils/hex-to-oklch";
 import { Providers } from "./providers";
 import Head from "next/head";
+import { generateFonts } from "@/utils/fonts";
 
-const onest = Onest({
-  variable: "--font-onest",
-  subsets: ["latin"],
-});
-
-const poppins = Poppins({
-  weight: "400", // o ["400", "700"], según necesites
-  subsets: ["latin"],
-  variable: "--font-poppins"
-});
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const font = await generateFonts();
   const settings = await fetchSiteSettings()
   //cambiar el valor para distinta tonalidad
   const primaryLightColor = hexToOklch(settings.primary_color, 0.90)
@@ -37,7 +28,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <ViewTransitions>
-      <html lang="en" suppressHydrationWarning className={`${onest.variable} ${poppins.variable}`}>
+      <html lang="en" suppressHydrationWarning className={`${font.variable} font-sans`}>
         <Head>
           <title>{settings.site_title || "Welcome to our site"}</title>
           <meta name="description" content={settings.meta_description} />

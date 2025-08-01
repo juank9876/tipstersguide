@@ -29,7 +29,8 @@ import {
   transformBtnSubmit,
   transformTextarea,
   transformSection,
-  transformSvg
+  transformSvg,
+  transformDiv
 } from './transformers'
 import type { JSX } from 'react'
 
@@ -58,7 +59,6 @@ const rules: TransformerRule[] = [
   { className: 'card-img-top', transformer: transformImg },
   { className: 'container', transformer: transformContainer },
   { className: 'testimonials', transformer: transformTestimonials },
-
   { className: 'feature-item', transformer: transformFeatureItem },
   { className: 'feature-list', transformer: transformFeatureList },
 
@@ -67,6 +67,7 @@ const rules: TransformerRule[] = [
   //Tags HTML
   { tagName: 'section', transformer: transformSection },
   { tagName: 'form', transformer: transformForm },
+  { tagName: 'div', transformer: transformDiv },
   { tagName: 'h2', transformer: transformH2 },
   { tagName: 'h3', transformer: transformH3 },
   { tagName: 'li', transformer: transformLi },
