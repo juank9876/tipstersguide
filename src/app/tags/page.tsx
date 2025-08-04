@@ -8,7 +8,7 @@ import { capitalize } from "@/utils/capitalize";
 
 export async function generateMetadata() {
     return {
-        title: await createPageTitle("Tags"),
+        title: await createPageTitle("Tags", "Tags"),
         description: capitalize("This is the categories site"),
     }
 }
