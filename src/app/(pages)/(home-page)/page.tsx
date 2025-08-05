@@ -48,10 +48,12 @@ export default async function Home() {
       settings={settings}
       pageProps={page}
     >
+      {/*
       <div className='relative '>
 
         <AsideH2Index html={page.html_content} />
       </div>
+      */}
       <HtmlRenderer html={page.html_content} cssContent={page.css_content} />
     </PreHomePage>
 

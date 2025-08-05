@@ -1,5 +1,4 @@
 import { fetchTags } from "@/api-fetcher/fetcher";
-import { Link } from "@/components/juankui/optionals/link";
 import { Section } from "@/components/juankui/wrappers/section";
 import { Card, CardContent } from "@/components/ui/card";
 import { createPageTitle, formatDate } from "@/lib/utils";

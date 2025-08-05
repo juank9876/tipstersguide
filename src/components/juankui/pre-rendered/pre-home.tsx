@@ -19,19 +19,15 @@ export function PreHomePage({ children, settings, pageProps }: HomePage) {
     ...pageProps
   }
   return (
-    <MainWrapper>
+    <MainWrapper className="">
       {isParticles && <ParticlesFull />}
 
-      <HeroHomePage {...props} />
-      <Section
-      >
+      {//<HeroHomePage {...props} />
+      }
 
 
+      {children}
 
-        <div className='flex max-w-[90vw] flex-col space-y-5 lg:max-w-[60vw]'>
-          {children}
-        </div>
-      </Section>
     </MainWrapper>
   )
 }

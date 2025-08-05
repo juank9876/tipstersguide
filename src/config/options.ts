@@ -4,6 +4,18 @@ type navPositionType = "start" | "center" | "end"
 const navPositionConfig: navPositionType = "center"
 export const navPosition = "justify-" + navPositionConfig
 
+
+
+export const navWidth = "lg:w-[60vw]"
+export const navWidthMobile = "w-[90vw]"
+
+export const footerWidth = "lg:w-[60vw]"
+export const footerWidthMobile = "w-[90vw]"
+
+export const htmlContentWidth = "lg:w-[100vw]"
+export const htmlContentWidthMobile = "w-[100vw]"
+
+
 //View transitions
 export const isViewTransitions = true
 export const isParticles = false

@@ -15,4 +15,5 @@ export function ParticlesFull({ color: _color }: { color?: string }) {
       refresh
     />
   )
+  else return null
 }

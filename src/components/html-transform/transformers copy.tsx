@@ -13,6 +13,14 @@ export function transformBrandlisty(el: Element) {
 
   return (
     <div className={`flex h-full flex-col ${el.attribs?.class || ''}`}>
+      <div className='flex flex-row items-center justify-center gap-8'>
+        <span className='bg-gradient-to-tr from-[var(--color-accent)] to-[var(--color-accent-dark)] text-white px-2 py-1 rounded-full inline-flex items-center justify-end gap-1 text-end text-sm font-bold mb-2'>
+          <Star className='size-3 mb-1' /> Recomendado en España
+        </span>
+        <span className='bg-gradient-to-br from-[var(--color-primary-semi-dark)] to-[var(--color-primary)] text-white px-2 py-1 rounded-full inline-flex items-center justify-end gap-1 text-end text-sm font-bold mb-2'>
+          <ShieldCheck className='size-4 mb-0.5' /> Verified
+        </span>
+      </div>
       <BrandlistyWidget
         key={id}
         apiKey={apikey || el.attribs['data-apikey']}
@@ -111,7 +119,7 @@ export function transformCard(el: Element, options: HTMLReactParserOptions) {
     <div className='relative flex flex-col '>
       {badgeContent &&
         <div className="absolute top-0 left-0 z-50">
-          <div className="size-16 flex items-center justify-center text-3xl font-bold rounded-full shadow-lg">
+          <div className="size-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-accent)] text-white flex items-center justify-center text-3xl font-bold rounded-full shadow-lg">
             {badgeContent}
           </div>
         </div>

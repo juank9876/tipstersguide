@@ -10,11 +10,10 @@ export function PreCategory({ children, category, className }: { children: React
   return (
     <MainWrapper>
       {isParticles && <ParticlesFull />}
-      <HeroCategory {...category} />
-      <article className={`${className}`}>
-        {children}
+      {//<HeroCategory {...category} />
+      }
+      {children}
 
-      </article>
     </MainWrapper>
   )
 }

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tipsters Profesionales - Predicciones Deportivas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-chart-line text-blue-700 text-3xl"></i>
+                    <h1 class="text-2xl font-bold text-gray-800">TipstersPro</h1>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#tipsters" class="text-gray-600 hover:text-blue-700 transition">Tipsters</a>
+                    <a href="#predicciones" class="text-gray-600 hover:text-blue-700 transition">Predicciones</a>
+                    <a href="#estadisticas" class="text-gray-600 hover:text-blue-700 transition">Estadísticas</a>
+                    <a href="#suscripcion" class="text-gray-600 hover:text-blue-700 transition">Suscripción</a>
+                </nav>
+                <button class="bg-blue-700 text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition">
+                    Iniciar Sesión
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-700 to-blue-600 text-white py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-5xl font-bold mb-6">Los Mejores Tipsters del Mundo</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">
+                Accede a predicciones profesionales de expertos verificados con historial comprobado
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-yellow-500 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-yellow-600 transition">
+                    Ver Predicciones Gratis
+                </button>
+                <button class="border-2 border-white text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-white hover:text-blue-700 transition">
+                    Conocer Tipsters
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-blue-700 mb-2">150+</div>
+                    <div class="text-gray-600">Tipsters Verificados</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-green-600 mb-2">78%</div>
+                    <div class="text-gray-600">Tasa de Acierto Promedio</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-yellow-500 mb-2">25K+</div>
+                    <div class="text-gray-600">Usuarios Activos</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-purple-600 mb-2">€2.5M</div>
+                    <div class="text-gray-600">Ganancias Generadas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Tipsters Section -->
+    <section id="tipsters" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12">Top Tipsters del Mes</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tipster Card 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://via.placeholder.com/60" alt="Tipster" class="w-15 h-15 rounded-full mr-4">
+                            <div>
+                                <h4 class="text-xl font-bold">Carlos Martínez</h4>
+                                <p class="text-gray-600">Especialista en Fútbol</p>
+                                <div class="flex items-center mt-1">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600 ml-2">(4.9)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-600">85%</div>
+                                <div class="text-sm text-gray-600">Aciertos</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-blue-700">156</div>
+                                <div class="text-sm text-gray-600">Picks</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-yellow-500">+€2.8K</div>
+                                <div class="text-sm text-gray-600">Profit</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition">
+                            Ver Predicciones
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tipster Card 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://via.placeholder.com/60" alt="Tipster" class="w-15 h-15 rounded-full mr-4">
+                            <div>
+                                <h4 class="text-xl font-bold">Ana García</h4>
+                                <p class="text-gray-600">Experta en Tenis</p>
+                                <div class="flex items-center mt-1">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600 ml-2">(4.8)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-600">82%</div>
+                                <div class="text-sm text-gray-600">Aciertos</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-blue-700">203</div>
+                                <div class="text-sm text-gray-600">Picks</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-yellow-500">+€3.2K</div>
+                                <div class="text-sm text-gray-600">Profit</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition">
+                            Ver Predicciones
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tipster Card 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <img src="https://via.placeholder.com/60" alt="Tipster" class="w-15 h-15 rounded-full mr-4">
+                            <div>
+                                <h4 class="text-xl font-bold">Miguel López</h4>
+                                <p class="text-gray-600">Analista de Baloncesto</p>
+                                <div class="flex items-center mt-1">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="text-sm text-gray-600 ml-2">(4.7)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-green-600">79%</div>
+                                <div class="text-sm text-gray-600">Aciertos</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-blue-700">134</div>
+                                <div class="text-sm text-gray-600">Picks</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-yellow-500">+€2.1K</div>
+                                <div class="text-sm text-gray-600">Profit</div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800 transition">
+                            Ver Predicciones
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Predictions Section -->
+    <section id="predicciones" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12">Predicciones Recientes</h3>
+            <div class="max-w-4xl mx-auto">
+                <!-- Prediction Card 1 -->
+                <div class="bg-gray-50 rounded-xl p-6 mb-6 border-l-4 border-green-600">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <img src="https://via.placeholder.com/40" alt="Tipster" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <h5 class="font-bold">Carlos Martínez</h5>
+                                <p class="text-sm text-gray-600">Hace 2 horas</p>
+                            </div>
+                        </div>
+                        <span class="bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">GANADA</span>
+                    </div>
+                    <div class="mb-4">
+                        <h6 class="text-lg font-semibold mb-2">Real Madrid vs Barcelona</h6>
+                        <p class="text-gray-700 mb-2"><strong>Predicción:</strong> Real Madrid +1.5 Handicap</p>
+                        <p class="text-gray-700 mb-2"><strong>Cuota:</strong> 1.85</p>
+                        <p class="text-gray-700"><strong>Análisis:</strong> El Real Madrid viene con una racha excelente en casa y Barcelona tiene varias bajas importantes...</p>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex space-x-4">
+                            <span class="text-sm text-gray-600"><i class="fas fa-futbol mr-1"></i> Fútbol</span>
+                            <span class="text-sm text-gray-600"><i class="fas fa-trophy mr-1"></i> La Liga</span>
+                        </div>
+                        <button class="text-blue-700 hover:text-blue-800 font-semibold">Ver Análisis Completo</button>
+                    </div>
+                </div>
+
+                <!-- Prediction Card 2 -->
+                <div class="bg-gray-50 rounded-xl p-6 mb-6 border-l-4 border-yellow-500">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <img src="https://via.placeholder.com/40" alt="Tipster" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <h5 class="font-bold">Ana García</h5>
+                                <p class="text-sm text-gray-600">Hace 4 horas</p>
+                            </div>
+                        </div>
+                        <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">EN JUEGO</span>
+                    </div>
+                    <div class="mb-4">
+                        <h6 class="text-lg font-semibold mb-2">Novak Djokovic vs Rafael Nadal</h6>
+                        <p class="text-gray-700 mb-2"><strong>Predicción:</strong> Más de 3.5 Sets</p>
+                        <p class="text-gray-700 mb-2"><strong>Cuota:</strong> 2.10</p>
+                        <p class="text-gray-700"><strong>Análisis:</strong> Ambos jugadores están en excelente forma física y sus enfrentamientos suelen ser muy disputados...</p>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex space-x-4">
+                            <span class="text-sm text-gray-600"><i class="fas fa-table-tennis mr-1"></i> Tenis</span>
+                            <span class="text-sm text-gray-600"><i class="fas fa-trophy mr-1"></i> Roland Garros</span>
+                        </div>
+                        <button class="text-blue-700 hover:text-blue-800 font-semibold">Ver Análisis Completo</button>
+                    </div>
+                </div>
+
+                <!-- Prediction Card 3 -->
+                <div class="bg-gray-50 rounded-xl p-6 mb-6 border-l-4 border-red-500">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center">
+                            <img src="https://via.placeholder.com/40" alt="Tipster" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <h5 class="font-bold">Miguel López</h5>
+                                <p class="text-sm text-gray-600">Ayer</p>
+                            </div>
+                        </div>
+                        <span class="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">PERDIDA</span>
+                    </div>
+                    <div class="mb-4">
+                        <h6 class="text-lg font-semibold mb-2">Lakers vs Warriors</h6>
+                        <p class="text-gray-700 mb-2"><strong>Predicción:</strong> Lakers -5.5 Handicap</p>
+                        <p class="text-gray-700 mb-2"><strong>Cuota:</strong> 1.90</p>
+                        <p class="text-gray-700"><strong>Análisis:</strong> Los Lakers tenían ventaja de local pero los Warriors sorprendieron con un gran juego exterior...</p>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex space-x-4">
+                            <span class="text-sm text-gray-600"><i class="fas fa-basketball-ball mr-1"></i> Baloncesto</span>
+                            <span class="text-sm text-gray-600"><i class="fas fa-trophy mr-1"></i> NBA</span>
+                        </div>
+                        <button class="text-blue-700 hover:text-blue-800 font-semibold">Ver Análisis Completo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Subscription Plans -->
+    <section id="suscripcion" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h3 class="text-3xl font-bold text-center mb-12">Planes de Suscripción</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Basic Plan -->
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+                    <h4 class="text-2xl font-bold mb-4">Básico</h4>
+                    <div class="text-4xl font-bold text-primary mb-6">€9.99<span class="text-lg text-gray-600">/mes</span></div>
+                    <ul class="text-left mb-8 space-y-3">
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>5 predicciones diarias</li>
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Análisis básico</li>
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Estadísticas limitadas</li>
+                        <li class="flex items-center"><i class="fas fa-times text-gray-400 mr-3"></i>Chat con tipsters</li>
+                    </ul>
+                    <button class="w-full bg-gray-200 text-gray-800 py-3 rounded-lg hover:bg-gray-300 transition">
+                        Elegir Plan
+                    </button>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="bg-white rounded-xl shadow-xl p-8 text-center border-4 border-primary relative">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary text-white px-6 py-2 rounded-full text-sm font-semibold">
+                        MÁS POPULAR
+                    </div>
+                    <h4 class="text-2xl font-bold mb-4">Premium</h4>
+                    <div class="text-4xl font-bold text-primary mb-6">€19.99<span class="text-lg text-gray-600">/mes</span></div>
+                    <ul class="text-left mb-8 space-y-3">
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Predicciones ilimitadas</li>
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Análisis detallado</li>
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Estadísticas completas</li>
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Chat con tipsters</li>
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Alertas en tiempo real</li>
+                    </ul>
+                    <button class="w-full bg-primary text-white py-3 rounded-lg hover:bg-blue-700 transition">
+                        Elegir Plan
+                    </button>
+                </div>
+
+                <!-- VIP Plan -->
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+                    <h4 class="text-2xl font-bold mb-4">VIP</h4>
+                    <div class="text-4xl font-bold text-primary mb-6">€39.99<span class="text-lg text-gray-600">/mes</span></div>
+                    <ul class="text-left mb-8 space-y-3">
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Todo lo de Premium</li>
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Predicciones VIP exclusivas</li>
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Consultoría personalizada</li>
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Acceso prioritario</li>
+                        <li class="flex items-center"><i class="fas fa-check text-success mr-3"></i>Soporte 24/7</li>
+                    </ul>
+                    <button class="w-full bg-secondary text-white py-3 rounded-lg hover:bg-yellow-500 transition">
+                        Elegir Plan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-chart-line text-primary text-2xl"></i>
+                        <h5 class="text-xl font-bold">TipstersPro</h5>
+                    </div>
+                    <p class="text-gray-400">La plataforma líder en predicciones deportivas profesionales.</p>
+                </div>
+                <div>
+                    <h6 class="font-bold mb-4">Deportes</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Fútbol</a></li>
+                        <li><a href="#" class="hover:text-white transition">Tenis</a></li>
+                        <li><a href="#" class="hover:text-white transition">Baloncesto</a></li>
+                        <li><a href="#" class="hover:text-white transition">Más deportes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="font-bold mb-4">Empresa</h6>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Sobre nosotros</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contacto</a></li>
+                        <li><a href="#" class="hover:text-white transition">Términos</a></li>
+                        <li><a href="#" class="hover:text-white transition">Privacidad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="font-bold mb-4">Síguenos</h6>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 TipstersPro. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        // Simple mobile menu toggle (if needed)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any interactive functionality here
+            console.log('TipstersPro page loaded successfully');
+        });
+    </script>
+</body>
+</html>

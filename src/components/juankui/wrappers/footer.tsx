@@ -1,5 +1,6 @@
 import { fetchCategories, fetchMenu } from "@/api-fetcher/fetcher";
 import { contextSiteSettings } from "@/app/context/getSiteSettings";
+import { footerWidth, footerWidthMobile } from "@/config/options";
 import { SiteSettings } from "@/types/types";
 import Link from "next/link";
 
@@ -139,7 +140,7 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
   return (
     <footer className="w-full bg-[var(--color-primary-dark)]">
       {/* Main Footer Content */}
-      <div className="mx-auto w-[70vw] px-4 py-12 sm:px-6 lg:px-8 flex justify-center items-center">
+      <div className={` mx-auto ${footerWidth} ${footerWidthMobile} px-4 py-12 sm:px-6 lg:px-8 flex justify-center items-center`}>
         <div className="flex flex-row justify-between items-start w-full">
           {/* Brand Section */}
           <div className="lg:col-span-2 justify-between flex flex-col items-center ">
@@ -162,7 +163,9 @@ export async function Footer({ settings }: { settings: SiteSettings }) {
                 {settings.site_description}
               </p>
             </div>
-            <FooterNewsletter />
+            {
+              //<FooterNewsletter />
+            }
           </div>
 
           {/* Navigation Links dinámicos */ menuItems.length > 0 && (

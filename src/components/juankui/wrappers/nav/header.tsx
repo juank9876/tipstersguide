@@ -7,6 +7,7 @@ import { Logo } from './logo'
 import { RenderMenu } from './render-menu'
 import { NavMobile } from './nav-mobile'
 import { headers } from 'next/headers';
+import { navWidth, navWidthMobile } from '@/config/options'
 
 
 
@@ -28,7 +29,7 @@ export async function Header() {
   return (
     <>
       <header className="sticky top-0 min-h-[70px] z-50 flex w-full flex-row items-center justify-center bg-[var(--color-primary-dark)] px-5 ">
-        <div className="w-custom mx-auto flex h-full flex-row items-center justify-between">
+        <div className={`${navWidth} ${navWidthMobile} mx-auto flex h-full flex-row items-center justify-between`}>
           <Logo
             {...settings}
           />
