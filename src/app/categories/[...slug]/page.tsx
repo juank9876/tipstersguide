@@ -129,7 +129,7 @@ export default async function Page({
                     </span>
                 </PreCategory>
             ) : (
-                <PreCategory category={category} className='flex w-[90vw] grid-cols-4 flex-col justify-center space-y-5 rounded-lg lg:grid lg:w-[70vw] lg:gap-5'>
+                <PreCategory category={category} className='py-10 grid grid-cols-1 w-[90vw] justify-center items-center gap-5 rounded-lg lg:flex lg:flex-wrap lg:w-[70vw] '>
 
                     {posts.map((post) => (
                         <CardPostCategory key={post.id} post={post} category={category} />

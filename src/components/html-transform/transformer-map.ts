@@ -19,10 +19,6 @@ import {
   transformPre,
   transformFeatureItem,
   transformFeatureList,
-  transformSectionBonuses,
-  transformBonusList,
-  transformBonusItem,
-  transformBonusLink,
   transformTestimonials,
   transformBlockquote,
   transformInput,
@@ -33,6 +29,7 @@ import {
   transformDiv
 } from './transformers'
 import type { JSX } from 'react'
+import { settings } from '@/config/debug-log'
 
 type TransformerRule = {
   className?: string
@@ -41,7 +38,7 @@ type TransformerRule = {
   transformer: (el: Element, options: HTMLReactParserOptions) => JSX.Element | null
 }
 
-const rules: TransformerRule[] = [
+const rulesOff: TransformerRule[] = [
   //Clases CSS
   { className: 'row', transformer: transformRow },
   {
@@ -55,7 +52,51 @@ const rules: TransformerRule[] = [
 
 ]
 
-export function getTransformer(el: Element, options: HTMLReactParserOptions) {
+const rulesOn: TransformerRule[] = [
+  //Clases CSS
+  { className: 'card', transformer: transformCard },
+  { className: 'card-body', transformer: transformCardBody },
+  { className: 'row', transformer: transformRow },
+  {
+    matcher: (el) => /col-(xs|sm|md|lg|xl)-\d+/.test(el.attribs?.class || ''),
+    transformer: transformCol
+  },
+  {
+    matcher: (el) => 'data-apikey' in el.attribs || 'apikey' in el.attribs,
+    transformer: transformBrandlisty,
+  },
+  { className: 'text-element', transformer: transformTextElement },
+  { className: 'btn', transformer: transformButton },
+  { className: 'card-img-top', transformer: transformImg },
+  { className: 'container', transformer: transformContainer },
+  //{ className: 'testimonials', transformer: transformTestimonials },
+  //{ className: 'feature-item', transformer: transformFeatureItem },
+  //{ className: 'feature-list', transformer: transformFeatureList },
+
+  { className: 'btn-submit', transformer: transformBtnSubmit },
+
+  //Tags HTML
+  { tagName: 'section', transformer: transformSection },
+  { tagName: 'form', transformer: transformForm },
+  { tagName: 'div', transformer: transformDiv },
+  { tagName: 'h2', transformer: transformH2 },
+  { tagName: 'h3', transformer: transformH3 },
+  { tagName: 'li', transformer: transformLi },
+  { tagName: 'p', transformer: transformP },
+  { tagName: 'img', transformer: transformImg },
+  { tagName: 'code', transformer: transformCode },
+  { tagName: 'pre', transformer: transformPre },
+  { tagName: 'strong', transformer: transformStrong },
+  { tagName: 'blockquote', transformer: transformBlockquote },
+  { tagName: 'input', transformer: transformInput },
+  { tagName: 'textarea', transformer: transformTextarea },
+  { tagName: 'button', transformer: transformButton },
+  { tagName: 'svg', transformer: transformSvg },
+
+]
+
+function getTransformer(el: Element, options: HTMLReactParserOptions) {
+  const rules = settings.styles.applyTemplateStyles ? rulesOn : rulesOff
   const classList = el.attribs?.class?.split(' ') ?? []
   const tagName = el.name
 

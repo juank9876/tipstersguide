@@ -12,9 +12,9 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
   return (
     <>
       {/*Card para PC*/}
-      <Card className="group relative h-full overflow-hidden border-none p-0 shadow-none transition-all duration-300 hover:scale-[1.02]">
+      <div className="rounded-lg w-[250px] h-[400px] group relative overflow-hidden border-none p-0 shadow-none transition-all duration-300 hover:scale-[1.02]">
         <Link href={`${categoryUrl}/${post.slug}`} className="h-full w-full">
-          <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
+
           <div
             className="relative h-full w-full bg-cover bg-center transition-transform duration-300"
             style={{
@@ -30,16 +30,16 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
                 {/* Title and Date */}
                 <div className='bg-gradient-to-br from-[var(--color-primary-dark)] to-[var(--color-primary-semi-dark)] px-3 backdrop-blur-sm rounded-full border border-[var(--color-primary)] w-fit'>
                   <p className="text-xs text-gray-300 sm:text-sm">
-                    {formatDate(post.published_at)}
+                    {formatDate(post.published_at || post.updated_at)}
                   </p>
 
                 </div>
-                <h2 className="text-xl font-bold text-start text-white sm:text-2xl md:text-3xl">
+                <h2 className="text-xl font-bold text-start text-white">
                   {decodeHtmlEntities(limitCharacters(post.title, 40))}
                 </h2>
 
                 {/* Excerpt - Hidden on mobile */}
-                <p className="hidden text-sm text-gray-300 sm:line-clamp-3 md:text-base">
+                <p className="text-sm text-gray-300">
                   {decodeHtmlEntities(limitCharacters(post.excerpt, 150))}
                 </p>
               </div>
@@ -60,7 +60,7 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
                       {post.author_name}
                     </span>
                     <span className="text-xs text-gray-300">
-                      {formatDate(post.published_at)}
+                      {formatDate(post.published_at || post.updated_at)}
                     </span>
                   </div>
                 </div>
@@ -68,12 +68,12 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
             </CardContent>
           </div>
         </Link>
-      </Card>
+      </div>
 
       {/*Card para movil*/}
       <Card className="duration-400 scale-custom relative w-full overflow-hidden border-none p-0 shadow-none transition hover:bg-[var(--color-primary-dark)] lg:hidden">
         <Link href={`/categories/${category.slug}/${post.slug}`} className="block w-full">
-          <ShineBorder shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]} />
+
 
           {/* Imagen como background */}
           <div
