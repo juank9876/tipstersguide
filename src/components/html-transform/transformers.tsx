@@ -243,19 +243,15 @@ export function transformButton(el: Element, options: HTMLReactParserOptions) {
 
 export function transformImg(el: Element) {
   return (
-    <div className={`relative h-[200px] w-[300px] rounded-lg ${el.attribs?.class || ''}`}>
-      <Image
-        alt={el.attribs.alt || 'sample image'}
-        //src={'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTKbWAJHSZvmB6idZtJ6VtB1O6pvq2K7UVgIzsSxcpyxmu2GOqZwBlgV-NJm1kSNLJl7fnqNRG4ep75DRePRSgWM_v99GQISy6BUURYHYHnOg'}
-        src={el.attribs.src || 'https://imgs.search.brave.com/Q3KM87IGdN-WX5xySRtFxbsjUYGEvnHmDEKXdVYkBys/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9jYXNp/bm8tc2lnbi0zMjgy/MzU0LmpwZw'}
-        fill
-        className="rounded-lg object-contain"
-      />
-
-    </div>
+    <Image
+      alt={el.attribs.alt || 'sample image'}
+      src={el.attribs.src || 'https://imgs.search.brave.com/Q3KM87IGdN-WX5xySRtFxbsjUYGEvnHmDEKXdVYkBys/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9jYXNp/bm8tc2lnbi0zMjgy/MzU0LmpwZw'}
+      width={500}
+      height={300}
+      className="rounded-lg h-auto w-full"
+    />
   )
 }
-
 export function transformH2(el: Element, options: HTMLReactParserOptions) {
   // Check if element has any text content
   const hasContent = el.children.some(child =>

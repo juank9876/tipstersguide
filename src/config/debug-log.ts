@@ -21,6 +21,10 @@ export const debug = {          //console logear variables para debugear los fet
     menu: false,
 
     createMetadata: false,
+
+
+    fetchAllSlugs: false,
+    fetchSlugToId: false,
 }
 
 export const settings = {       //manejar opciones de config del proyecto. No afecta al codigo, solo logs

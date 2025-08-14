@@ -6,6 +6,13 @@ interface SocialLinks {
   youtube?: string;
   linkedin?: string;
 }
+export interface Slug {
+  slug: {
+    id: string,
+    title: string,
+    type: string
+  }
+}
 
 export interface SiteSettings {
   id: string

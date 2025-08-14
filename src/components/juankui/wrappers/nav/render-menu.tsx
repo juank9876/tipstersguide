@@ -2,7 +2,7 @@
 
 import { navPosition } from '@/config/options'
 import { capitalize } from '@/utils/capitalize'
-import { NavItemType } from '@/types/types';
+import { Category, NavItemType, Slug } from '@/types/types';
 import { ChevronUp } from 'lucide-react';
 import { ChevronDown } from 'lucide-react';
 import { Link } from '@/components/juankui/optionals/link';
@@ -59,8 +59,10 @@ function ListItem({ title, href, className, isChild = false, childCategories, pa
   )
 }
 
+
+
 // ... existing code ...
-export function RenderMenu({ normalizedItems }: { normalizedItems: NavItemType[] }) {
+export function RenderMenu({ normalizedItems, allSlugs }: { normalizedItems: NavItemType[], allSlugs: Slug[] }) {
 
   return (
     <nav>
@@ -75,15 +77,23 @@ export function RenderMenu({ normalizedItems }: { normalizedItems: NavItemType[]
                 </span>
                 <div className="absolute left-0 top-full w-[250px] bg-white rounded-lg z-20 hidden group-hover/menu:block py-5">
                   <ul className="py-0">
-                    <h4 className="text-base font-light uppercase text-[var(--color-accent-dark)] px-4">Categories</h4>
-                    {item.children.map((category) => (
-                      <ListItem
-                        key={category.id}
-                        title={capitalize(category.title)}
-                        href={category.url}
-                        childCategories={category.children}
-                        parentSlug={''} />
-                    ))}
+                    {item.children.map((category) => {
+
+                      const foundCategory = Object.entries(allSlugs).find(([slug, data]) => {
+                        return '/' + slug === category.url;
+                      });
+                      // Construir href
+                      const isCategory = foundCategory ? `/categories` : "";
+
+                      return (
+                        <ListItem
+                          key={category.id}
+                          title={capitalize(category.title)}
+                          href={category.url}
+                          childCategories={category.children}
+                          parentSlug={isCategory} />
+                      )
+                    })}
                   </ul>
                 </div>
               </>

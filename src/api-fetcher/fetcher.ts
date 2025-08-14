@@ -1,12 +1,14 @@
 import { debug, debugLog } from "@/config/debug-log";
-import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings, Tag } from "@/types/types";
+import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
 
-type MethodType = "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink" | "tags" | "tag";
+type MethodType = "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink" | "all-slugs" | "slug-to-id";
 
 interface FetcherParams {
   method: MethodType;
   id?: string
   type?: string
+  slug?: string
+  category_id?: string
 }
 
 export interface ResponseInterface<T = unknown> {
@@ -15,12 +17,18 @@ export interface ResponseInterface<T = unknown> {
   data: T // Puedes ajustar el tipo según lo que esperes
 }
 
-export async function fetcher<T>({ method, id, type }: FetcherParams): Promise<T> {
+export async function fetcher<T>({ method, id, type, slug, category_id }: FetcherParams): Promise<T> {
   const baseUrl = `https://intercms.dev/api/v2/data.php`
-  const url = baseUrl + `?method=${method}` + `&api_key=${process.env.API_KEY}` + `&project_id=${process.env.PROJECT_ID}` + (id ? `&id=${id}` : ``) + (type ? `&type=${type}` : ``)
+  const url = baseUrl +
+    `?method=${method}` +
+    `&api_key=${process.env.API_KEY}` +
+    `&project_id=${process.env.PROJECT_ID}` +
+    (id ? `&id=${id}` : ``) +
+    (type ? `&type=${type}` : ``) +
+    (slug ? `&slug=${slug}` : ``) +
+    (category_id ? `&category_id=${category_id}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
-
 
   try {
     const res = await fetch(url, {
@@ -34,6 +42,7 @@ export async function fetcher<T>({ method, id, type }: FetcherParams): Promise<T
     }
 
   } catch (error) {
+    console.error(url, method)
     console.error("Error fetching data:", error);
     return undefined as T;
   }
@@ -60,14 +69,11 @@ export async function fetchCategoryById(id: string): Promise<Category> {
   return fetcher<Category>({ method: "category", id });
 }
 export async function fetchMenu(): Promise<NavItemType[]> {
-  const menu = await fetcher<NavItemType[]>({ method: "menu" });
-  debugLog(debug.menu, menu)
-  return menu;
+  return fetcher<NavItemType[]>({ method: "menu" });
 }
 export async function fetchSiteSettings() {
   return fetcher<SiteSettings>({ method: "site-settings" });
 }
-
 export async function fetchAuthors() {
   return fetcher<Author[]>({ method: "authors" });
 }
@@ -81,10 +87,40 @@ export async function fetchPermalink(id: string, type: PermalinkType): Promise<P
   return fetcher<PermalinkData>({ method: "permalink", id, type });
 }
 
-export async function fetchTags() {
-  return fetcher<Tag[]>({ method: "tags" });
+interface CategoryPosts {
+  category: Category
+  posts: Post[]
 }
-export async function fetchTagById(id: string): Promise<Tag> {
-  return fetcher<Tag>({ method: "tag", id });
+export async function fetchCategoryPosts(id: string): Promise<CategoryPosts> {
+  return fetcher<CategoryPosts>({ method: "category-posts", category_id: id });
 }
 
+export interface Slug {
+  slug: {
+    id: string,
+    title: string,
+    type: string
+  }
+}
+export async function fetchAllSlugs(type: "page" | "post" | "category"): Promise<Slug[]> {
+  const slugs = await fetcher<Slug[]>({ method: "all-slugs", type });
+  debugLog(debug.fetchAllSlugs, "fetchAllSlugs", slugs)
+  return slugs
+}
+
+interface SlugToId {
+  id: string,
+  title: string,
+  type: string
+  slug: string
+}
+export async function fetchSlugToId(slug: string, type: "page" | "post" | "category"): Promise<string | null> {
+  const slugRes = await fetcher<SlugToId>({ method: "slug-to-id", slug, type });
+  //console.log(slugRes)
+  if (!slugRes) {
+    return null
+  }
+  debugLog(debug.fetchSlugToId, "fetchSlugToId", slugRes)
+
+  return slugRes.id
+}
