@@ -63,7 +63,6 @@ function ListItem({ title, href, className, isChild = false, childCategories, pa
 
 // ... existing code ...
 export function RenderMenu({ normalizedItems, allSlugs }: { normalizedItems: NavItemType[], allSlugs: Slug[] }) {
-
   return (
     <nav>
       <ul className="flex flex-row gap-2 items-center justify-center w-full  border-0 shadow-none py-0">

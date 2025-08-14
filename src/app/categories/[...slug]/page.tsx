@@ -48,7 +48,6 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
 
     //const categoryId = categoryMap[categorySlug]
     const categoryId = await fetchSlugToId(categorySlug, "category")
-    console.log('categoryId', categoryId, 'categorySlug', categorySlug)
     /*
         const urlSegments = slugArray[0] === "categories" ? slugArray.slice(1) : slugArray;
         let url = "/" + urlSegments.join("/");
@@ -71,7 +70,6 @@ async function getDataFromParams(slugArray: string[]): Promise<RouteData> {
 
         return { type: 'category', category }
     } else {
-        console.log('Category not found', categoryId, categorySlug)
 
         const postSlug = slugArray[slugArray.length - 1]
         const postId = await fetchSlugToId(postSlug, "post")
@@ -104,7 +102,6 @@ export default async function Page({
     const slugArray = (await params).slug || []
     const data = await getDataFromParams(slugArray)
 
-    console.log('test')
     if (data.type === 'post') {
         const post = data.post
 
@@ -128,7 +125,7 @@ export default async function Page({
                     </span>
                 </PreCategory>
             ) : (
-                <PreCategory category={category} className='flex w-[90vw] flex-wrap flex-col justify-center space-y-5 rounded-lg lg:flex-row lg:w-[70vw] lg:gap-5'>
+                <PreCategory category={category} className='flex w-[90vw] flex-wrap flex-col justify-center my-10 rounded-lg lg:flex-row lg:w-[70vw] lg:gap-5'>
 
                     {posts.map((post) => (
                         <CardPostCategory key={post.id} post={post} category={category} />

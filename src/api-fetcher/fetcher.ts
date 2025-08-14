@@ -1,7 +1,7 @@
 import { debug, debugLog } from "@/config/debug-log";
-import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
+import { Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings, Tag } from "@/types/types";
 
-type MethodType = "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink" | "all-slugs" | "slug-to-id";
+type MethodType = "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" | "author" | "permalink" | "all-slugs" | "slug-to-id" | "tags";
 
 interface FetcherParams {
   method: MethodType;
@@ -123,4 +123,8 @@ export async function fetchSlugToId(slug: string, type: "page" | "post" | "categ
   debugLog(debug.fetchSlugToId, "fetchSlugToId", slugRes)
 
   return slugRes.id
+}
+
+export async function fetchTags() {
+  return fetcher<Tag[]>({ method: "tags" });
 }
