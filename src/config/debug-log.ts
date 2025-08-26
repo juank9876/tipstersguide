@@ -14,7 +14,7 @@ export const debug = {          //console logear variables para debugear los fet
     fetchCategories: false,
 
     pages: false,
-    htmlContent: false,
+    htmlContent: true,
     cssContent: false,
     postOrCategoryPermalink: false,
     currentPostOrCategoryUrl: false,
