@@ -17,23 +17,18 @@ import {
   transformForm,
   transformP,
   transformPre,
-  transformFeatureItem,
-  transformFeatureList,
   transformTestimonials,
   transformBlockquote,
   transformInput,
   transformBtnSubmit,
   transformTextarea,
-  transformSection,
-  transformSvg,
-  transformDiv,
   transformAccordion,
   transformAccordionItem,
   transformAccordionHeader,
-  transformAccordionContent
+  transformAccordionContent,
+  transformSvg
 } from './transformers'
 import type { JSX } from 'react'
-import { settings } from '@/config/debug-log'
 
 type TransformerRule = {
   className?: string
@@ -42,21 +37,7 @@ type TransformerRule = {
   transformer: (el: Element, options: HTMLReactParserOptions) => JSX.Element | null
 }
 
-const rulesOff: TransformerRule[] = [
-  //Clases CSS
-  { className: 'row', transformer: transformRow },
-  {
-    matcher: (el) => /col-(xs|sm|md|lg|xl)-\d+/.test(el.attribs?.class || ''),
-    transformer: transformCol
-  },
-  {
-    matcher: (el) => 'data-apikey' in el.attribs || 'apikey' in el.attribs,
-    transformer: transformBrandlisty,
-  },
-
-]
-
-const rulesOn: TransformerRule[] = [
+const rules: TransformerRule[] = [
   //Clases CSS
   { className: 'card', transformer: transformCard },
   { className: 'card-body', transformer: transformCardBody },
@@ -73,9 +54,7 @@ const rulesOn: TransformerRule[] = [
   { className: 'btn', transformer: transformButton },
   { className: 'card-img-top', transformer: transformImg },
   { className: 'container', transformer: transformContainer },
-  //{ className: 'testimonials', transformer: transformTestimonials },
-  //{ className: 'feature-item', transformer: transformFeatureItem },
-  //{ className: 'feature-list', transformer: transformFeatureList },
+  { className: 'testimonials', transformer: transformTestimonials },
 
   { className: 'btn-submit', transformer: transformBtnSubmit },
 
@@ -85,9 +64,7 @@ const rulesOn: TransformerRule[] = [
   { className: 'accordion-body', transformer: transformAccordionContent },
 
   //Tags HTML
-  { tagName: 'section', transformer: transformSection },
   { tagName: 'form', transformer: transformForm },
-  { tagName: 'div', transformer: transformDiv },
   { tagName: 'h2', transformer: transformH2 },
   { tagName: 'h3', transformer: transformH3 },
   { tagName: 'li', transformer: transformLi },
@@ -99,13 +76,11 @@ const rulesOn: TransformerRule[] = [
   { tagName: 'blockquote', transformer: transformBlockquote },
   { tagName: 'input', transformer: transformInput },
   { tagName: 'textarea', transformer: transformTextarea },
-  { tagName: 'button', transformer: transformButton },
+  //{ tagName: 'button', transformer: transformButton },
   { tagName: 'svg', transformer: transformSvg },
-
 ]
 
-function getTransformer(el: Element, options: HTMLReactParserOptions) {
-  const rules = settings.styles.applyTemplateStyles ? rulesOn : rulesOff
+export function getTransformer(el: Element, options: HTMLReactParserOptions) {
   const classList = el.attribs?.class?.split(' ') ?? []
   const tagName = el.name
 
