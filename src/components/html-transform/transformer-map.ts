@@ -26,7 +26,11 @@ import {
   transformTextarea,
   transformSection,
   transformSvg,
-  transformDiv
+  transformDiv,
+  transformAccordion,
+  transformAccordionItem,
+  transformAccordionHeader,
+  transformAccordionContent
 } from './transformers'
 import type { JSX } from 'react'
 import { settings } from '@/config/debug-log'
@@ -74,6 +78,11 @@ const rulesOn: TransformerRule[] = [
   //{ className: 'feature-list', transformer: transformFeatureList },
 
   { className: 'btn-submit', transformer: transformBtnSubmit },
+
+  { className: 'accordion', transformer: transformAccordion },
+  { className: 'accordion-item', transformer: transformAccordionItem },
+  { className: 'accordion-header', transformer: transformAccordionHeader },
+  { className: 'accordion-body', transformer: transformAccordionContent },
 
   //Tags HTML
   { tagName: 'section', transformer: transformSection },
