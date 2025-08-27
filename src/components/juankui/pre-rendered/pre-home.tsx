@@ -26,7 +26,9 @@ export function PreHomePage({ children, settings, pageProps }: HomePage) {
       }
 
 
-      {children}
+      <Section>
+        {children}
+      </Section>
 
     </MainWrapper>
   )

@@ -5,6 +5,7 @@ import { HeroCategory } from '@/components/juankui/hero/hero'
 import { Category } from '@/types/types'
 import { ParticlesFull } from '../hero/particles'
 import { isParticles } from '@/config/options'
+import { Section } from '../wrappers/section'
 
 export function PreCategory({ children, category, className }: { children: ReactNode, className?: string, category: Category }) {
   return (
@@ -12,9 +13,9 @@ export function PreCategory({ children, category, className }: { children: React
       {isParticles && <ParticlesFull />}
       {//<HeroCategory {...category} />
       }
-      <div className={className}>
+      <Section>
         {children}
-      </div>
+      </Section>
 
     </MainWrapper>
   )

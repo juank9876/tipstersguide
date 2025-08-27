@@ -13,8 +13,9 @@ export function PrePage({ children, page }: { children: ReactNode, page: Page })
       {
         //<HeroPage {...page} />
       }
-      {children}
-
+      <Section>
+        {children}
+      </Section>
     </MainWrapper>
   )
 }

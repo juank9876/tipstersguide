@@ -110,7 +110,9 @@ export async function PrePost({ children, post }: { children: ReactNode, post: P
       //className='flex flex-col items-start justify-start bg-white w-full rounded-lg px-10 py-5'
       >
       */}
-      {children}
+      <Section>
+        {children}
+      </Section>
       {/*
       </div>
        Card de autor MeriStation 
