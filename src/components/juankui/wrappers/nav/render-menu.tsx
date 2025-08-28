@@ -64,7 +64,7 @@ function ListItem({ title, href, className, isChild = false, childCategories, pa
 // ... existing code ...
 export function RenderMenu({ normalizedItems, allSlugs }: { normalizedItems: NavItemType[], allSlugs: Slug[] }) {
   return (
-    <nav>
+    <nav className=''>
       <ul className="flex flex-row gap-2 items-center justify-center w-full  border-0 shadow-none py-0">
         {normalizedItems.map((item) => (
           <li key={item.id} className="relative group/menu">
@@ -99,7 +99,7 @@ export function RenderMenu({ normalizedItems, allSlugs }: { normalizedItems: Nav
             ) : (
               <NavLink
                 href={item.url}
-                className="px-4 py-3 text-base font-bold tracking-wide text-white transition-colors duration-150 hover:bg-[var(--color-accent-dark)] rounded-lg"
+                className="!px-4 !py-3 flex text-base font-bold tracking-wide text-white transition-colors duration-150 hover:bg-[var(--color-accent-dark)] rounded-lg"
               //label={item.title}
               >
                 {item.title}

@@ -19,7 +19,7 @@ export function PreHomePage({ children, settings, pageProps }: HomePage) {
     ...pageProps
   }
   return (
-    <MainWrapper className="">
+    <MainWrapper>
       {isParticles && <ParticlesFull />}
 
       {//<HeroHomePage {...props} />
