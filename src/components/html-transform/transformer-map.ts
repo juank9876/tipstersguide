@@ -27,7 +27,11 @@ import {
   transformAccordionHeader,
   transformAccordionContent,
   transformSvg,
-  transformTakeaways
+  transformTakeaways,
+  transformCasinoList,
+  transformProfessionalsSection,
+  transformTabs,
+  fixCollapse
 } from './transformers'
 import type { JSX } from 'react'
 
@@ -63,6 +67,11 @@ const rules: TransformerRule[] = [
   { className: 'accordion-item', transformer: transformAccordionItem },
   { className: 'accordion-header', transformer: transformAccordionHeader },
   { className: 'accordion-body', transformer: transformAccordionContent },
+
+  { className: 'casino-list', transformer: transformCasinoList },
+  { className: 'professionals-section', transformer: transformProfessionalsSection },
+  { className: 'accordion-collapse', transformer: fixCollapse },
+  //{ className: 'tabs', transformer: transformTabs },
 
   //Tags HTML
   { tagName: 'form', transformer: transformForm },

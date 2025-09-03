@@ -477,7 +477,7 @@ export function transformAccordionHeader(el: Element, options: HTMLReactParserOp
   };
 
   return (
-    <AccordionTrigger role="div" className="w-full cursor-pointer">
+    <AccordionTrigger {...attribs} role="div" className="w-full cursor-pointer">
       {domToReact(el.children as DOMNode[], newOptions)}
     </AccordionTrigger>
   );
@@ -485,11 +485,26 @@ export function transformAccordionHeader(el: Element, options: HTMLReactParserOp
 export function transformAccordionContent(el: Element, options: HTMLReactParserOptions) {
   const attribs = fixAttribs(el.attribs)
   return (
-    <AccordionContent {...attribs} className="w-full">
+    <AccordionContent {...attribs} className="text-black">
       {domToReact(el.children as DOMNode[], options)}
     </AccordionContent>
   )
 }
+export function fixCollapse(el: Element, options: HTMLReactParserOptions) {
+  const attribs = fixAttribs(el.attribs)
+  if (attribs.className?.includes(' collapse')) {
+    attribs.className = attribs.className.replace(' collapse', '')
+  }
+  return (
+    <div {...attribs}>
+      {domToReact(el.children as DOMNode[], options)}
+    </div>
+  )
+}
+
+
+
+
 
 export function transformTakeaways(el: Element, options: HTMLReactParserOptions) {
   return (
@@ -497,6 +512,28 @@ export function transformTakeaways(el: Element, options: HTMLReactParserOptions)
       <section {...el.attribs} className={`${el.attribs?.class || ''} w-full`}>
         {domToReact(el.children as DOMNode[], options)}
       </section>
+    </div>
+  )
+}
+
+export function transformTabs(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <div {...fixAttribs(el.attribs)} className={`${el.attribs?.class || ''} w-full`}>
+      {domToReact(el.children as DOMNode[], options)}
+    </div>
+  )
+}
+export function transformCasinoList(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <div {...fixAttribs(el.attribs)} className={`${el.attribs?.class || ''} w-full`}>
+      {domToReact(el.children as DOMNode[], options)}
+    </div>
+  )
+}
+export function transformProfessionalsSection(el: Element, options: HTMLReactParserOptions) {
+  return (
+    <div {...fixAttribs(el.attribs)} className={`${el.attribs?.class || ''} w-full`}>
+      {domToReact(el.children as DOMNode[], options)}
     </div>
   )
 }
