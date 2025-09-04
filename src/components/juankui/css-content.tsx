@@ -8,11 +8,12 @@ type DynamicStyleProps = {
 
 const DynamicStyle = ({ cssContent }: DynamicStyleProps) => {
     if (!cssContent) return undefined;
-    debugLog(debug.cssContent, '[+] CSS Content:' + cssContent)
 
-    if (cssContent.includes('* {')) {
-        cssContent.replace('* {', '.fixed-global-styles-from-builder {');
-    }
+    cssContent = cssContent.replace(/\/\*.*?\*\//g, '');
+    // Replace all standalone * selectors with the fixed class
+    cssContent = cssContent.replace(/\*\s*{/g, '.fixed-global-styles-from-builder {');
+
+    debugLog(debug.cssContent, '[+] CSS Content:' + cssContent)
     useEffect(() => {
 
         const styleTag = document.createElement('style');

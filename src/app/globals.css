@@ -287,19 +287,8 @@
         var(--color-primary-dark) 100%);
   }
 
-  /* Custom scrollbar styles */
-  *::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
 
-  *::-webkit-scrollbar-thumb {
-    background-color: var(--color-accent);
-    border-radius: 4px;
+  .text-element {
+    @apply w-full
   }
-
-  *::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-
 }
