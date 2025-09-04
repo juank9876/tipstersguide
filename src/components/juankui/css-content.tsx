@@ -3,13 +3,16 @@ import { debug, debugLog } from '@/config/debug-log';
 import { useEffect } from 'react';
 
 type DynamicStyleProps = {
-    cssContent: string | undefined;
+    cssContent: string | null;
 };
 
 const DynamicStyle = ({ cssContent }: DynamicStyleProps) => {
     if (!cssContent) return null;
     debugLog(debug.cssContent, '[+] CSS Content:' + cssContent)
 
+    if (cssContent.includes('* {')) {
+        cssContent.replace('* {', '.fixed-global-styles-from-builder {');
+    }
     useEffect(() => {
 
         const styleTag = document.createElement('style');
