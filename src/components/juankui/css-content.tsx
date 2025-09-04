@@ -3,11 +3,11 @@ import { debug, debugLog } from '@/config/debug-log';
 import { useEffect } from 'react';
 
 type DynamicStyleProps = {
-    cssContent: string | null;
+    cssContent: string | undefined;
 };
 
 const DynamicStyle = ({ cssContent }: DynamicStyleProps) => {
-    if (!cssContent) return null;
+    if (!cssContent) return undefined;
     debugLog(debug.cssContent, '[+] CSS Content:' + cssContent)
 
     if (cssContent.includes('* {')) {
@@ -26,7 +26,7 @@ const DynamicStyle = ({ cssContent }: DynamicStyleProps) => {
         };
     }, [cssContent]);
 
-    return null; // No renderiza nada visual
+    return undefined; // No renderiza nada visual
 };
 
 export default DynamicStyle;
