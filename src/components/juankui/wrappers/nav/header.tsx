@@ -6,13 +6,9 @@ import { contextSiteSettings } from '@/app/context/getSiteSettings'
 import { Logo } from './logo'
 import { RenderMenu } from './render-menu'
 import { NavMobile } from './nav-mobile'
-import { headers } from 'next/headers';
-import { navWidth, navWidthMobile } from '@/config/options'
-
 
 
 export async function Header() {
-  const headersList = await headers();
   const rawNavItems = await fetchMenu()
   const navItems = rawNavItems.filter(item => item.status === 'active')
   const sortedItems = navItems.sort((a, b) => Number(a.sort_order) - Number(b.sort_order))
@@ -29,18 +25,18 @@ export async function Header() {
   const navProps = { categoriesItems, settings, normalizedItems }
   return (
     <>
-      <header className="sticky top-0 min-h-[70px] z-50 flex w-full flex-row items-center justify-center bg-[var(--color-primary-dark)] px-5 ">
-        <div className={`${navWidth} ${navWidthMobile} mx-auto flex h-full flex-row items-center justify-between`}>
+      <header className="sticky top-0 z-50 flex w-full flex-row items-center justify-center bg-[var(--color-primary-dark)] px-5 py-3">
+        <div className="w-custom mx-auto flex h-full flex-row items-center justify-between">
           <Logo
             {...settings}
           />
 
-          <NavigationMenu className='hidden lg:flex'>
+          <div className='hidden lg:flex'>
             <RenderMenu
               normalizedItems={normalizedItems}
               allSlugs={allSlugs}
             />
-          </NavigationMenu>
+          </div>
         </div>
 
         {/* VERSION MOVIL */}

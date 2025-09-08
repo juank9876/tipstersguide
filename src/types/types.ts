@@ -6,33 +6,26 @@ interface SocialLinks {
   youtube?: string;
   linkedin?: string;
 }
-export interface Slug {
-  slug: {
-    id: string,
-    title: string,
-    type: string
-  }
-}
 
 export interface SiteSettings {
   id: string
   project_id: string
   site_title: string
   site_description: string
-  site_logo: string | undefined
-  favicon: string | undefined
+  site_logo: string | null
+  favicon: string | null
   primary_color: string
   secondary_color: string
   accent_color: string
   font_family: string
   meta_title: string
   meta_description: string
-  meta_keywords: string | undefined
-  ga_tracking_id: string | undefined
-  facebook_pixel: string | undefined
+  meta_keywords: string | null
+  ga_tracking_id: string | null
+  facebook_pixel: string | null
   social_links: SocialLinks // puedes tiparlo mejor si tienes la estructura
-  custom_css: string | undefined
-  custom_js: string | undefined
+  custom_css: string | null
+  custom_js: string | null
   created_at: string
   updated_at: string
   schema_data: unknown[]
@@ -49,7 +42,7 @@ export interface Author {
   social_links: SocialLinks
   meta_title: string;
   meta_description: string;
-  schema_data: unknown | undefined;
+  schema_data: unknown | null;
   status: string;
   created_at: string;
   updated_at: string;
@@ -61,7 +54,7 @@ export interface NavItemType {
   project_id: string
   title: string
   url: string
-  parent_id: string | undefined
+  parent_id: string | null
   sort_order: string
   target: '_self' | '_blank' | '_parent' | '_top' | string
   css_class: string
@@ -74,9 +67,9 @@ export interface NavItemType {
 export type Category = {
   id: string
   project_id: string
-  parent_id: string | undefined
-  parent_name: string | undefined
-  parent_slug: string | undefined
+  parent_id: string | null
+  parent_name: string | null
+  parent_slug: string | null
   name: string
   slug: string
   description: string
@@ -102,16 +95,24 @@ export interface PostResponse {
   sidebar: Sidebar // definilo si lo vas a usar, o poné `any`
 }
 
+export interface Slug {
+  slug: {
+    id: string,
+    title: string,
+    type: string
+  }
+}
+
 export interface Post {
   id: string
   project_id: string
-  parent_id: string | undefined
+  parent_id: string | null
   author_id: string
   title: string
   slug: string
   excerpt: string
   html_content: string
-  css_content: string | undefined
+  css_content: string | null
   featured_image: string
   meta_title: string | undefined
   meta_description: string | undefined
@@ -133,8 +134,8 @@ export interface Post {
   author_name: string
   author_bio: string
   author_avatar: string
-  parent_title: string | undefined
-  parent_slug: string | undefined
+  parent_title: string | null
+  parent_slug: string | null
   tags: Tag[]
   categories: CategoryWithPrimaryFlag[]
   primary_category: Category
@@ -164,12 +165,12 @@ export interface SidebarCategory {
   name: string
   slug: string
   description: string
-  parent_id: string | undefined
+  parent_id: string | null
   sort_order: string
   level: string
   path: string
-  meta_title: string | undefined
-  meta_description: string | undefined
+  meta_title: string | null
+  meta_description: string | null
   schema_data: unknown // poné un tipo más específico si sabés qué estructura tiene
   status: string
   created_at: string
@@ -183,12 +184,11 @@ export interface Tag {
   name: string
   slug: string
   description: string
-  meta_title: string | undefined
-  meta_description: string | undefined
-  schema_data: unknown | undefined
+  meta_title: string | null
+  meta_description: string | null
+  schema_data: unknown | null
   created_at: string
   updated_at: string
-  post_count: string
 }
 
 
@@ -209,19 +209,19 @@ export type CategoryItem = {
   name: string;
   slug: string;
   description: string;
-  parent_id: string | undefined;
+  parent_id: string | null;
   sort_order: string;
   level: string;
   path: string;
-  meta_title: string | undefined;
-  meta_description: string | undefined;
-  schema_data: unknown | undefined; // Puedes ajustar esto según el tipo exacto de `schema_data` si lo conoces
+  meta_title: string | null;
+  meta_description: string | null;
+  schema_data: unknown | null; // Puedes ajustar esto según el tipo exacto de `schema_data` si lo conoces
   status: string;
   created_at: string;
   updated_at: string;
   post_count: string;
-  parent_name: string | undefined;
-  parent_slug: string | undefined;
+  parent_name: string | null;
+  parent_slug: string | null;
   child_categories_count: number;
   seo_url: string;
   breadcrumbs: Breadcrumb[];
@@ -241,13 +241,13 @@ export type PagePostSlugProps = {
 export interface Page {
   id: string
   project_id: string
-  parent_id: string | undefined
+  parent_id: string | null
   author_id: string
   title: string
   slug: string
   excerpt: string
   html_content: string
-  css_content: string | undefined
+  css_content: string | null
   featured_image: string
   meta_title: string
   meta_description: string
@@ -266,8 +266,8 @@ export interface Page {
   template: string
   show_in_menu: string
   is_home: string
-  parent_title: string | undefined
-  parent_slug: string | undefined
+  parent_title: string | null
+  parent_slug: string | null
   child_pages: unknown[] // podrías tiparlo como PageData[] si se anidan igual
   seo_url: string
   breadcrumbs: Breadcrumb[]
@@ -278,7 +278,7 @@ export interface PermalinkCategoryHierarchy {
   id: string;
   name: string;
   slug: string;
-  parent_id: string | undefined;
+  parent_id: string | null;
 }
 
 export interface PermalinkBreadcrumb {

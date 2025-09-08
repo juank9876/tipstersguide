@@ -7,7 +7,7 @@ import { rippleEffect } from "../juankui/legacy/ripple-components";
 
 type Direction = "TOP" | "LEFT" | "BOTTOM" | "RIGHT";
 
-export function HoverBorderGradient({
+export function HoverBorderGradient ({
   children,
   containerClassName,
   className,
@@ -36,7 +36,7 @@ export function HoverBorderGradient({
     return directions[nextIndex];
   };
 
-  function handleClick(event: React.MouseEvent<HTMLDivElement>) {
+  function handleClick (event: React.MouseEvent<HTMLDivElement>) {
     rippleEffect(event);
     const element = document.getElementById("top-casinos");
     console.log(element)
@@ -73,7 +73,7 @@ export function HoverBorderGradient({
       }}
       onMouseLeave={() => setHovered(false)}
       className={cn(
-        "h-full relative flex rounded-full  content-center transition duration-500 dark:bg-white/20 items-center flex-col flex-nowrap  justify-center overflow-visible p-px decoration-clone",
+        "h-full relative flex rounded-xl  content-center transition duration-500 dark:bg-white/20 items-center flex-col flex-nowrap  justify-center overflow-visible p-px decoration-clone",
         containerClassName
       )}
       {...props}
@@ -81,7 +81,7 @@ export function HoverBorderGradient({
       <div
         onClick={handleClick}
         className={cn(
-          "w-auto z-10 bg-black  rounded-full",
+          "w-auto z-10 bg-black  rounded-xl",
           className
         )}
       >
@@ -89,7 +89,7 @@ export function HoverBorderGradient({
       </div>
       <motion.div
         className={cn(
-          "flex-none inset-0 overflow-hidden absolute z-0 rounded-full"
+          "flex-none inset-0 overflow-hidden absolute z-0 rounded-xl"
         )}
         style={{
           filter: "blur(2px)",
@@ -105,7 +105,7 @@ export function HoverBorderGradient({
         }}
         transition={{ ease: "linear", duration: duration ?? 1 }}
       />
-      <div className="h-full top-0 bg-slate-950 absolute z-1 flex inset-[2px] rounded-full" />
+      <div className="h-full top-0 bg-slate-950 absolute z-1 flex inset-[2px] rounded-xl" />
     </Tag>
   );
 }
