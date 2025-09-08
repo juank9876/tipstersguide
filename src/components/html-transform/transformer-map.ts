@@ -27,13 +27,10 @@ import {
   transformAccordionHeader,
   transformAccordionContent,
   transformSvg,
-  transformTakeaways,
-  transformCasinoList,
-  transformProfessionalsSection,
-  transformTabs,
-  fixCollapse
+  transformTakeaways
 } from './transformers'
 import type { JSX } from 'react'
+import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
 
 type TransformerRule = {
   className?: string
@@ -68,11 +65,6 @@ const rules: TransformerRule[] = [
   { className: 'accordion-header', transformer: transformAccordionHeader },
   { className: 'accordion-body', transformer: transformAccordionContent },
 
-  { className: 'casino-list', transformer: transformCasinoList },
-  { className: 'professionals-section', transformer: transformProfessionalsSection },
-  { className: 'accordion-collapse', transformer: fixCollapse },
-  //{ className: 'tabs', transformer: transformTabs },
-
   //Tags HTML
   { tagName: 'form', transformer: transformForm },
   { tagName: 'h2', transformer: transformH2 },
@@ -86,6 +78,13 @@ const rules: TransformerRule[] = [
   { tagName: 'blockquote', transformer: transformBlockquote },
   { tagName: 'input', transformer: transformInput },
   { tagName: 'textarea', transformer: transformTextarea },
+
+  //Table fix
+  { tagName: 'table', transformer: transformTable },
+  { tagName: 'thead', transformer: transformThead },
+  { tagName: 'tr', transformer: transformTr },
+  { tagName: 'td', transformer: transformTd },
+  { tagName: 'tbody', transformer: transformTBody },
   //{ tagName: 'button', transformer: transformButton },
   //{ tagName: 'svg', transformer: transformSvg },
 
