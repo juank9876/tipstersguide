@@ -57,13 +57,13 @@ async function AuthorCard({ name, avatar, bio, author_id }: { name: string, avat
 
   // Si no hay enlaces válidos, no renderices la fila de iconos
   return (
-    <div className="border-t w-1/2 border-b py-6 px-10 flex items-center gap-4 my-6 rounded-lg hover:to-[var(--color-primary-semi-dark)] transition-colors bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary)]">
+    <div className="border-t border-b py-6 px-10 flex items-center gap-4 my-6 rounded-lg hover:to-[var(--color-primary-semi-dark)] transition-colors bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-primary-dark)]">
       <div className="flex-shrink-0">
         <Image
           src={avatar || 'https://api.dicebear.com/7.x/lorelei/svg?seed=default'}
           alt={name}
-          width={64}
-          height={64}
+          width={56}
+          height={56}
           className="rounded-full border object-cover"
         />
       </div>
@@ -95,27 +95,11 @@ export async function PrePost({ children, post }: { children: ReactNode, post: P
   return (
     <MainWrapper>
       {isParticles && <ParticlesFull />}
-      {//<HeroPost {...post} />
-      }
+      <HeroPost {...post} />
 
-      {/* Separador SVG decorativo para transición suave 
-        <div className="w-full overflow-hidden -mb-3">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-12">
-            <path fill="#f1f5f9" d="M0,0 C480,60 960,0 1440,60 L1440,60 L0,60 Z"></path>
-          </svg>
-        </div>
-
-        
-      <div
-      //className='flex flex-col items-start justify-start bg-white w-full rounded-lg px-10 py-5'
-      >
-      */}
       <Section>
         {children}
-      </Section>
-      {/*
-      </div>
-       Card de autor MeriStation 
+        {/* Card de autor MeriStation */}
         {post.author_name && (
           <AuthorCard
             author_id={post.author_id}
@@ -124,7 +108,7 @@ export async function PrePost({ children, post }: { children: ReactNode, post: P
             bio={post.author_bio}
           />
         )}
-          */}
+      </Section>
     </MainWrapper>
   )
 }

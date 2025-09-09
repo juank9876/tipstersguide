@@ -10,9 +10,8 @@ export function PrePage({ children, page }: { children: ReactNode, page: Page })
   return (
     <MainWrapper>
       {isParticles && <ParticlesFull />}
-      {
-        //<HeroPage {...page} />
-      }
+
+      <HeroPage {...page} />
       <Section>
         {children}
       </Section>
