@@ -25,7 +25,9 @@ export const debug = {
 
     fetchAllSlugs: false,
     fetchSlugToId: false,
-    apiFooter: true,
+    apiFooter: false,
+
+    cookiesConsent: true,          //log cookies consent component info
 }
 
 
