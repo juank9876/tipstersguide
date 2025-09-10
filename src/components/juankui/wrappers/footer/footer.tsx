@@ -11,39 +11,6 @@ import { CopyrightBar } from "./copyright-bar";
 const exampleFooter: FooterType = {
   "columns": [
     {
-      "id": 1,
-      "project_id": 1,
-      "title": "Navigation",
-      "sort_order": 1,
-      "status": "active",
-      "created_at": "2024-01-15 10:00:00",
-      "updated_at": "2024-01-15 10:00:00",
-      "items": [
-        {
-          "id": 1,
-          "column_id": 1,
-          "title": "Home",
-          "url": "/",
-          "target": "_self",
-          "sort_order": 1,
-          "status": "active",
-          "created_at": "2024-01-15 10:00:00",
-          "updated_at": "2024-01-15 10:00:00"
-        },
-        {
-          "id": 2,
-          "column_id": 1,
-          "title": "About Us",
-          "url": "/about",
-          "target": "_self",
-          "sort_order": 2,
-          "status": "active",
-          "created_at": "2024-01-15 10:00:00",
-          "updated_at": "2024-01-15 10:00:00"
-        }
-      ]
-    },
-    {
       "id": 2,
       "project_id": 1,
       "title": "Support",
