@@ -36,7 +36,7 @@ export function DefaultFooter({
     jsonFooter
 }: {
     settings: SiteSettings;
-    menuItems: NavItemType[];
+    menuItems?: NavItemType[];
     jsonFooter: Footer;
 }) {
     const footer = jsonFooter;
@@ -68,20 +68,22 @@ export function DefaultFooter({
                         <h3 className="text-xl underline text-yellow-400 uppercase text-center tracking-wider ml-2">
                             Navigation
                         </h3>
-                        <ul className="space-y-2 flex flex-col justify-center items-center">
-                            {menuItems.map((item: any) => (
-                                <li key={item.id}>
-                                    <Link
-                                        href={item.url}
-                                        target={item.target}
-                                        className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 flex items-center gap-2 group text-xl"
-                                    >
-                                        <span className="w-1 h-1 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                                        {item.title}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
+                        {menuItems && (
+                            <ul className="space-y-2 flex flex-col justify-center items-center">
+                                {menuItems?.map((item: any) => (
+                                    <li key={item.id}>
+                                        <Link
+                                            href={item.url}
+                                            target={item.target}
+                                            className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 flex items-center gap-2 group text-xl"
+                                        >
+                                            <span className="w-1 h-1 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                            {item.title}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                     {/* Footer Columns */}
                     {footer.columns.map((column: any) => (
