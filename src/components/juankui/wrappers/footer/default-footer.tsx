@@ -1,6 +1,8 @@
 import { Category, NavItemType, SiteSettings } from "@/types/types";
 import { FooterLinkList, FooterSocialIcons } from "./footer";
 import { Link } from "../../optionals/link";
+import { Footer } from "@/types/footer";
+import { Bebas_Neue } from "next/font/google";
 
 const SUPPORT_LINKS = [
     { href: "/privacy", label: "Privacidad" },
@@ -22,103 +24,117 @@ const RESPONSIBLE_GAMING_LINKS = [
     { href: "/iconos-footer/logo.png", label: "Juego Responsable" },
     { href: "/iconos-footer/mayor-edad.png", label: "Juego Responsable" },
 ];
+const bebasNeue = Bebas_Neue({
+    weight: '400',
+    subsets: ['latin'],
+    display: 'swap',
+});
 
 export function DefaultFooter({
     settings,
     menuItems,
-    categoriesItems
+    jsonFooter
 }: {
     settings: SiteSettings;
     menuItems: NavItemType[];
-    categoriesItems: Category[];
+    jsonFooter: Footer;
 }) {
-    const currentYear = new Date().getFullYear();
+    const footer = jsonFooter;
     return (
-        <footer className="w-full bg-[var(--color-primary-dark)]">
-            {/* Main Footer Content */}
-            <div className="py-10 w-[90vw] lg:w-[60vw] mx-auto flex flex-wrap  lg:flex-row gap-5 justify-between">
-
-                {/* Brand Section */}
-                <div className="flex flex-col">
-                    {settings.site_logo && (
-                        <img
-                            src={settings.site_logo}
-                            alt={settings.site_title}
-                            className="h-8 w-auto"
-                        />
-                    )}
-                    <h4 className="text-xl font-bold text-white">
-                        {settings.site_title}
-                    </h4>
-
-                    <p className="text-sm text-slate-300 leading-relaxed">
-                        {settings.site_description}
-                    </p>
-
-                    <FooterSocialIcons />
-
-
-                </div>
-
-                {/* Navigation Links dinámicos */}
-
-                <FooterLinkList
-                    title="Navegación"
-                    links={menuItems.filter(item => item.status === 'active').map(item => ({
-                        href: item.url,
-                        label: item.title
-                    }))}
-                />
-
-
-                {/* Categorías dinámicas 
-        <FooterLinkList
-          title="Categorías"
-          links={categoriesItems.map(cat => ({
-            href: `/categories/${cat.slug}`,
-            label: cat.name
-          }))}
-        />
-*/}
-
-                {/* Legal & Support */}
-                <div className="flex flex-col">
-                    <FooterLinkList title="Soporte" links={SUPPORT_LINKS} />
-                </div>
-
-                <div className="">
-                    <h4 className="text-slate-200 uppercase ">Juego Responsable</h4>
-                    <div className="space-x-4 flex flex-wrap flex-row pt-4">
-                        {RESPONSIBLE_GAMING_LINKS.map(link => (
+        <footer className={`w-full bg-gradient-to-b from-[#0A0B2E] to-[#0A0B2E] ${bebasNeue.className}`}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+                {/* Main Footer Content */}
+                <div className="flex flex-wrap lg:flex-row justify-between items-start ">
+                    {/* Brand Section */}
+                    <div className="flex flex-col space-y-4 col-span-1 sm:col-span-2 lg:col-span-1">
+                        {settings.site_logo && (
                             <img
-                                key={link.href}
-                                src={link.href}
-                                alt={link.label}
-                                className="w-fit h-8"
+                                src={settings.site_logo}
+                                alt={settings.site_title}
+                                className="h-8 w-auto"
                             />
-                        ))}
+                        )}
+                        <h2 className="text-2xl text-start underline text-white">
+                            {settings.site_title}
+                        </h2>
+                        <p className="text-xl text-slate-300 leading-relaxed max-w-xs">
+                            {settings.site_description}
+                        </p>
+                        <div className="pt-4">
+                            <FooterSocialIcons />
+                        </div>
+                    </div>
+
+                    {/* Footer Columns */}
+                    {footer.columns.map((column: any) => (
+                        <div key={column.id} className="space-y-4">
+                            <h3 className="text-xl underline text-yellow-400 uppercase text-center tracking-wider ml-2">
+                                {column.title}
+                            </h3>
+                            <ul className="space-y-2 flex flex-col justify-center items-center">
+                                {column.items.map((item: any) => (
+                                    <li key={item.id}>
+                                        <Link
+                                            href={item.url}
+                                            target={item.target}
+                                            className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 flex items-center gap-2 group text-xl"
+                                        >
+                                            <span className="w-1 h-1 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                                            {item.title}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Legal Images and Links */}
+                <div className="mt-12 pt-8 border-t border-gray-800">
+                    <div className="flex flex-col space-y-6 sm:space-y-0 sm:flex-row sm:justify-between sm:items-center">
+                        {/* Legal Images */}
+                        <div className="grid grid-cols-3 sm:flex sm:space-x-6 gap-4 justify-center sm:justify-start">
+                            {footer.legal_images.map((image: any) => (
+                                <a
+                                    key={image.id}
+                                    href={image.link_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="opacity-75 hover:opacity-100 transition-opacity"
+                                >
+                                    <img
+                                        src={image.image_url}
+                                        alt={image.alt_text}
+                                        className="h-8 sm:h-10 w-auto"
+                                    />
+                                </a>
+                            ))}
+                        </div>
+
+                        {/* Legal Links */}
+                        <div className="flex flex-wrap gap-4 justify-center sm:justify-end">
+                            {footer.legal_links.map((link: any) => (
+                                <Link
+                                    key={link.id}
+                                    href={link.url}
+                                    className="text-xs sm:text-xl text-gray-400 hover:text-yellow-400 transition-colors"
+                                >
+                                    {link.title}
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </div>
 
-
-            </div>
-
-            {/* Bottom Bar */}
-            <div className="border-t border-slate-300 flex flex-col items-center justify-center  gap-4 py-3 text-slate-300 hover:text-slate-100 font-light">
-                <span className=" text-sm  ">
-                    © {currentYear} {settings.site_title}. Todos los derechos
-                    reservados.
-                </span>
-                <div className="flex justify-center flex-wrap">
-                    {LEGAL_LINKS.map(link => (
-                        <Link
-                            key={link.href}
-                            href={link.href}
-                            className="text-sm font-light transition-colors px-4 py-1 "
-                        >
-                            {link.label}
-                        </Link>
-                    ))}
+                {/* Copyright Section */}
+                <div className="mt-8 text-center">
+                    <p className="text-xs sm:text-xl text-gray-400 px-4">
+                        © {footer.copyright.start_year} - {footer.copyright.end_year}{' '}
+                        {footer.copyright.company_name}. {footer.copyright.copyright_text}
+                    </p>
+                    <p className="mt-2 text-xs text-gray-500">
+                        18+ | Juega con responsabilidad
+                    </p>
                 </div>
             </div>
         </footer>

@@ -8,153 +8,150 @@ import { type Footer as FooterType } from "@/types/footer";
 import { MainFooterContent } from "./main-footer-content";
 import { CopyrightBar } from "./copyright-bar";
 
-const exampleFooter = {
-  "status": "success",
-  "message": "Loaded successfully",
-  "data": {
-    "columns": [
-      {
-        "id": 1,
-        "project_id": 1,
-        "title": "Navigation",
-        "sort_order": 1,
-        "status": "active",
-        "created_at": "2024-01-15 10:00:00",
-        "updated_at": "2024-01-15 10:00:00",
-        "items": [
-          {
-            "id": 1,
-            "column_id": 1,
-            "title": "Home",
-            "url": "/",
-            "target": "_self",
-            "sort_order": 1,
-            "status": "active",
-            "created_at": "2024-01-15 10:00:00",
-            "updated_at": "2024-01-15 10:00:00"
-          },
-          {
-            "id": 2,
-            "column_id": 1,
-            "title": "About Us",
-            "url": "/about",
-            "target": "_self",
-            "sort_order": 2,
-            "status": "active",
-            "created_at": "2024-01-15 10:00:00",
-            "updated_at": "2024-01-15 10:00:00"
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "project_id": 1,
-        "title": "Support",
-        "sort_order": 2,
-        "status": "active",
-        "created_at": "2024-01-15 10:00:00",
-        "updated_at": "2024-01-15 10:00:00",
-        "items": [
-          {
-            "id": 3,
-            "column_id": 2,
-            "title": "Help Center",
-            "url": "/help",
-            "target": "_self",
-            "sort_order": 1,
-            "status": "active",
-            "created_at": "2024-01-15 10:00:00",
-            "updated_at": "2024-01-15 10:00:00"
-          },
-          {
-            "id": 4,
-            "column_id": 2,
-            "title": "Contact",
-            "url": "/contact",
-            "target": "_blank",
-            "sort_order": 2,
-            "status": "active",
-            "created_at": "2024-01-15 10:00:00",
-            "updated_at": "2024-01-15 10:00:00"
-          }
-        ]
-      }
-    ],
-    "legal_images": [
-      {
-        "id": 1,
-        "project_id": 1,
-        "image_url": "https://cdn.example.com/begambleaware.png",
-        "link_url": "https://begambleaware.org",
-        "alt_text": "BeGambleAware",
-        "title": "Responsible Gaming",
-        "sort_order": 1,
-        "status": "active",
-        "created_at": "2024-01-15 10:00:00",
-        "updated_at": "2024-01-15 10:00:00"
-      },
-      {
-        "id": 2,
-        "project_id": 1,
-        "image_url": "https://cdn.example.com/gambling-commission.png",
-        "link_url": "https://gamblingcommission.gov.uk",
-        "alt_text": "UK Gambling Commission",
-        "title": "Licensed by UKGC",
-        "sort_order": 2,
-        "status": "active",
-        "created_at": "2024-01-15 10:00:00",
-        "updated_at": "2024-01-15 10:00:00"
-      }
-    ],
-    "legal_links": [
-      {
-        "id": 1,
-        "project_id": 1,
-        "link_type": "privacy_policy",
-        "title": "Privacy Policy",
-        "url": "/privacy-policy",
-        "target": "_self",
-        "status": "active",
-        "created_at": "2024-01-15 10:00:00",
-        "updated_at": "2024-01-15 10:00:00"
-      },
-      {
-        "id": 2,
-        "project_id": 1,
-        "link_type": "terms_of_service",
-        "title": "Terms of Service",
-        "url": "/terms-of-service",
-        "target": "_self",
-        "status": "active",
-        "created_at": "2024-01-15 10:00:00",
-        "updated_at": "2024-01-15 10:00:00"
-      },
-      {
-        "id": 3,
-        "project_id": 1,
-        "link_type": "sitemap",
-        "title": "Sitemap",
-        "url": "/sitemap.xml",
-        "target": "_self",
-        "status": "active",
-        "created_at": "2024-01-15 10:00:00",
-        "updated_at": "2024-01-15 10:00:00"
-      }
-    ],
-    "copyright": {
+const exampleFooter: FooterType = {
+  "columns": [
+    {
       "id": 1,
       "project_id": 1,
-      "start_year": 2020,
-      "end_year": 2024,
-      "company_name": "Your Company Name",
-      "copyright_text": "All rights reserved",
+      "title": "Navigation",
+      "sort_order": 1,
+      "status": "active",
+      "created_at": "2024-01-15 10:00:00",
+      "updated_at": "2024-01-15 10:00:00",
+      "items": [
+        {
+          "id": 1,
+          "column_id": 1,
+          "title": "Home",
+          "url": "/",
+          "target": "_self",
+          "sort_order": 1,
+          "status": "active",
+          "created_at": "2024-01-15 10:00:00",
+          "updated_at": "2024-01-15 10:00:00"
+        },
+        {
+          "id": 2,
+          "column_id": 1,
+          "title": "About Us",
+          "url": "/about",
+          "target": "_self",
+          "sort_order": 2,
+          "status": "active",
+          "created_at": "2024-01-15 10:00:00",
+          "updated_at": "2024-01-15 10:00:00"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "project_id": 1,
+      "title": "Support",
+      "sort_order": 2,
+      "status": "active",
+      "created_at": "2024-01-15 10:00:00",
+      "updated_at": "2024-01-15 10:00:00",
+      "items": [
+        {
+          "id": 3,
+          "column_id": 2,
+          "title": "Help Center",
+          "url": "/help",
+          "target": "_self",
+          "sort_order": 1,
+          "status": "active",
+          "created_at": "2024-01-15 10:00:00",
+          "updated_at": "2024-01-15 10:00:00"
+        },
+        {
+          "id": 4,
+          "column_id": 2,
+          "title": "Contact",
+          "url": "/contact",
+          "target": "_blank",
+          "sort_order": 2,
+          "status": "active",
+          "created_at": "2024-01-15 10:00:00",
+          "updated_at": "2024-01-15 10:00:00"
+        }
+      ]
+    }
+  ],
+  "legal_images": [
+    {
+      "id": 1,
+      "project_id": 1,
+      "image_url": "https://cdn.example.com/begambleaware.png",
+      "link_url": "https://begambleaware.org",
+      "alt_text": "BeGambleAware",
+      "title": "Responsible Gaming",
+      "sort_order": 1,
+      "status": "active",
+      "created_at": "2024-01-15 10:00:00",
+      "updated_at": "2024-01-15 10:00:00"
+    },
+    {
+      "id": 2,
+      "project_id": 1,
+      "image_url": "https://cdn.example.com/gambling-commission.png",
+      "link_url": "https://gamblingcommission.gov.uk",
+      "alt_text": "UK Gambling Commission",
+      "title": "Licensed by UKGC",
+      "sort_order": 2,
       "status": "active",
       "created_at": "2024-01-15 10:00:00",
       "updated_at": "2024-01-15 10:00:00"
     }
-  },
-  "response_time": 45
+  ],
+  "legal_links": [
+    {
+      "id": 1,
+      "project_id": 1,
+      "link_type": "privacy_policy",
+      "title": "Privacy Policy",
+      "url": "/privacy-policy",
+      "target": "_self",
+      "status": "active",
+      "created_at": "2024-01-15 10:00:00",
+      "updated_at": "2024-01-15 10:00:00"
+    },
+    {
+      "id": 2,
+      "project_id": 1,
+      "link_type": "terms_of_service",
+      "title": "Terms of Service",
+      "url": "/terms-of-service",
+      "target": "_self",
+      "status": "active",
+      "created_at": "2024-01-15 10:00:00",
+      "updated_at": "2024-01-15 10:00:00"
+    },
+    {
+      "id": 3,
+      "project_id": 1,
+      "link_type": "sitemap",
+      "title": "Sitemap",
+      "url": "/sitemap.xml",
+      "target": "_self",
+      "status": "active",
+      "created_at": "2024-01-15 10:00:00",
+      "updated_at": "2024-01-15 10:00:00"
+    }
+  ],
+  "copyright": {
+    "id": 1,
+    "project_id": 1,
+    "start_year": 2020,
+    "end_year": 2024,
+    "company_name": "Your Company Name",
+    "copyright_text": "All rights reserved",
+    "status": "active",
+    "created_at": "2024-01-15 10:00:00",
+    "updated_at": "2024-01-15 10:00:00"
+  }
 }
+
+
 
 export function FooterLinkList({ title, links }: { title: string, links: { href: string, label: string }[] }) {
   // Si hay más de 5, dividir en columnas
@@ -165,16 +162,17 @@ export function FooterLinkList({ title, links }: { title: string, links: { href:
   );
   return (
     <div>
-      <h4 className=" text-slate-200 uppercase  tracking-wide mb-1">{title}</h4>
-      <div className={`grid gap-x-6 ${numCols > 1 ? `grid-cols-${numCols}` : ''}`}>
+      <h4 className="text-lg font-bold text-yellow-400 uppercase tracking-wider mb-4">{title}</h4>
+      <div className={`grid gap-x-8 ${numCols > 1 ? `grid-cols-${numCols}` : ''}`}>
         {columns.map((col, idx) => (
-          <ul className="space-y-2" key={idx}>
+          <ul className="space-y-3" key={idx}>
             {col.map(link => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm text-slate-300 hover:text-slate-100 transition-colors font-semibold"
+                  className="text-gray-300 hover:text-yellow-400 transition-colors duration-200 flex items-center gap-2 group"
                 >
+                  <span className="w-1 h-1 bg-yellow-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
                   {link.label}
                 </Link>
               </li>
@@ -236,30 +234,7 @@ export async function FooterSocialIcons() {
     </div>
   )
 }
-/*
-function FooterNewsletter() {
-  return (
-    <div className="mt-6 flex flex-col">
-      <p className="text-sm text-slate-100 mb-2">
-        Suscríbete a nuestro boletín
-      </p>
-      <div className="flex">
-        <input
-          id="email"
-          autoComplete="email"
-          type="email"
-          placeholder="tu@email.com"
-          name="email"
-          className="flex-1 py-2 text-sm border border-slate-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
-        <button className="px-4 py-2 text-sm font-medium text-white bg-[var(--color-accent)] cursor-pointer rounded-r-md focus:ring-offset-2 transition-colors">
-          Suscribir
-        </button>
-      </div>
-    </div>
-  )
-}
-*/
+
 
 export async function Footer() {
 
@@ -286,19 +261,12 @@ export async function Footer() {
 
   if (isFooter == false || footer === undefined) {
     return (
-      <DefaultFooter
-        settings={settings}
-        menuItems={menuItems}
-        categoriesItems={categoriesItems}
-      />
+      <DefaultFooter settings={settings} menuItems={menuItems} jsonFooter={exampleFooter} />
     )
   }
 
 
   else return (
-    <footer className="w-full bg-[var(--color-primary-dark)]">
-      <MainFooterContent footer={footer} settings={settings} />
-      <CopyrightBar footer={footer} settings={settings} />
-    </footer>
+    <DefaultFooter settings={settings} menuItems={menuItems} jsonFooter={footer} />
   );
 }
