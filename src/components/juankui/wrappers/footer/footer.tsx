@@ -234,6 +234,6 @@ export async function Footer() {
 
 
   else return (
-    <DefaultFooter settings={settings} menuItems={menuItems} jsonFooter={footer} />
+    <DefaultFooter settings={settings} jsonFooter={footer} />
   );
 }

@@ -64,11 +64,11 @@ export function DefaultFooter({
                             <FooterSocialIcons />
                         </div>
                     </div>
-                    <div className="space-y-4">
-                        <h3 className="text-xl underline text-yellow-400 uppercase text-center tracking-wider ml-2">
-                            Navigation
-                        </h3>
-                        {menuItems && (
+                    {menuItems && (
+                        <div className="space-y-4">
+                            <h3 className="text-xl underline text-yellow-400 uppercase text-center tracking-wider ml-2">
+                                Navigation
+                            </h3>
                             <ul className="space-y-2 flex flex-col justify-center items-center">
                                 {menuItems?.map((item: any) => (
                                     <li key={item.id}>
@@ -83,8 +83,8 @@ export function DefaultFooter({
                                     </li>
                                 ))}
                             </ul>
-                        )}
-                    </div>
+                        </div>
+                    )}
                     {/* Footer Columns */}
                     {footer.columns.map((column: any) => (
                         <div key={column.id} className="space-y-4">
