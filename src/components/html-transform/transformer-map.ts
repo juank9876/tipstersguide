@@ -22,14 +22,11 @@ import {
   transformInput,
   transformBtnSubmit,
   transformTextarea,
-  transformAccordion,
-  transformAccordionItem,
-  transformAccordionHeader,
-  transformAccordionContent,
   transformSvg,
   transformTakeaways
 } from './transformers'
 import type { JSX } from 'react'
+import { transformAccordion, transformAccordionItem, transformAccordionHeader, transformAccordionContent, fixCollapse } from './transformAccordion/accordion'
 //import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
 
 type TransformerRule = {
@@ -64,6 +61,9 @@ const rules: TransformerRule[] = [
   { className: 'accordion-item', transformer: transformAccordionItem },
   { className: 'accordion-header', transformer: transformAccordionHeader },
   { className: 'accordion-body', transformer: transformAccordionContent },
+
+  //Fixes 
+  { className: 'accordion-collapse', transformer: fixCollapse },
 
   //Tags HTML
   { tagName: 'form', transformer: transformForm },
