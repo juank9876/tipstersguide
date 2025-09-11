@@ -14,7 +14,7 @@ interface SectionProps {
 export function Section({ children, className, style }: SectionProps) {
   return (
     <div
-      className={`relative flex flex-col w-[70vw] h-full items-center justify-center ${className}`}
+      className={`relative flex flex-col  w-full lg:w-[70vw] h-full items-center justify-center ${className}`}
       style={style}
     >
       {isParticles && <ParticlesFull />}

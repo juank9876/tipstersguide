@@ -44,9 +44,9 @@ export function DefaultFooter({
         <footer className={`w-full bg-gradient-to-b from-[#0A0B2E] to-[#0A0B2E] ${bebasNeue.className}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
                 {/* Main Footer Content */}
-                <div className="flex flex-wrap lg:flex-row justify-between items-start ">
+                <div className="flex flex-wrap flex-col md:flex-row justify-between items-center md:items-start space-y-5">
                     {/* Brand Section */}
-                    <div className="flex flex-col space-y-4 col-span-1 sm:col-span-2 lg:col-span-1">
+                    <div className="flex flex-col space-y-4 items-center justify-center">
                         {settings.site_logo && (
                             <img
                                 src={settings.site_logo}
@@ -60,9 +60,7 @@ export function DefaultFooter({
                         <p className="text-xl text-slate-300 leading-relaxed max-w-xs">
                             {settings.site_description}
                         </p>
-                        <div className="pt-4">
-                            <FooterSocialIcons />
-                        </div>
+                        <FooterSocialIcons />
                     </div>
                     {menuItems && (
                         <div className="space-y-4">

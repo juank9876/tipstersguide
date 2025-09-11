@@ -30,7 +30,7 @@ import {
   transformTakeaways
 } from './transformers'
 import type { JSX } from 'react'
-import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
+//import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
 
 type TransformerRule = {
   className?: string
@@ -80,11 +80,13 @@ const rules: TransformerRule[] = [
   { tagName: 'textarea', transformer: transformTextarea },
 
   //Table fix
+  /*
   { tagName: 'table', transformer: transformTable },
   { tagName: 'thead', transformer: transformThead },
   { tagName: 'tr', transformer: transformTr },
   { tagName: 'td', transformer: transformTd },
   { tagName: 'tbody', transformer: transformTBody },
+   */
   //{ tagName: 'button', transformer: transformButton },
   //{ tagName: 'svg', transformer: transformSvg },
 
