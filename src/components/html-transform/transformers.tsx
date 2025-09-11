@@ -431,7 +431,7 @@ export function transformSvg(el: Element, options: HTMLReactParserOptions) {
 export function transformAccordion(el: Element, options: HTMLReactParserOptions) {
   const attribs = fixAttribs(el.attribs)
   return (
-    <Accordion type="single" collapsible className={`${attribs.className || ''} w-full ml-5`}>
+    <Accordion type="single" collapsible className={`${attribs.className || ''} w-full`}>
       {domToReact(el.children as DOMNode[], options)}
     </Accordion>
   )
