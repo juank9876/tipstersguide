@@ -1,30 +1,16 @@
 import { DOMNode, Element, HTMLReactParserOptions } from 'html-react-parser'
-import {
-  transformH2,
-  transformH3,
-  transformLi,
-  transformCard,
-  transformRow,
-  transformTextElement,
-  transformButton,
-  transformCol,
-  transformImg,
-  transformContainer,
-  transformBrandlisty,
-  transformCardBody,
-  transformCode,
-  transformStrong,
-  transformForm,
-  transformP,
-  transformPre,
-  transformTestimonials,
-  transformBlockquote,
-  transformInput,
-  transformBtnSubmit,
-  transformTextarea,
-  transformSvg,
-  transformTakeaways
-} from './transformers'
+// Layout components
+import { transformRow, transformCol, transformContainer } from './transformLayout/layout'
+// Card components
+import { transformCard, transformCardBody } from './transformCards/cards'
+// Text components
+import { transformH2, transformH3, transformLi, transformCode, transformStrong, transformP, transformPre, transformTextElement } from './transformText/text'
+// Form components
+import { transformForm, transformInput, transformTextarea, transformBtnSubmit, transformButton } from './transformForms/forms'
+// Media components
+import { transformImg, transformSvg } from './transformMedia/media'
+// Special components
+import { transformBrandlisty, transformTestimonials, transformBlockquote, transformTakeaways } from './transformSpecial/special'
 import type { JSX } from 'react'
 import { transformAccordion, transformAccordionItem, transformAccordionHeader, transformAccordionContent, fixCollapse } from './transformAccordion/accordion'
 //import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'

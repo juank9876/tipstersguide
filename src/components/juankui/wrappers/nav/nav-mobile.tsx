@@ -75,7 +75,6 @@ export function NavMobile(navProps: NavProps) {
                         ))}
                     </div>
 
-                    {/* Categories Section */}
                     {categoriesItems.length > 0 && (
                         <div className="mt-2 pb-6 px-3">
                             <h3 className="py-3 px-4 text-sm font-medium text-[var(--color-accent)]">

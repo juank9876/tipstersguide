@@ -1,11 +1,9 @@
 // components/HtmlTransform/transformers.ts
 import { DOMNode, domToReact, Element, HTMLReactParserOptions } from 'html-react-parser'
 import { Button } from '../ui/button'
-import Image from 'next/image'
 import { CardShine } from '../juankui/legacy/card-shine'
-import { ArrowRight, Star, Sparkles, Flame, Bolt, Circle, Dice1, Dice3, Dice4, Dice5, Dice2, Dice6, Dice1Icon, Dice3Icon, Dice4Icon, Dice2Icon, Dice6Icon, Dice5Icon, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Star, Sparkles, Flame, Bolt, Dice1Icon, Dice3Icon, Dice4Icon, Dice2Icon, Dice6Icon, Dice5Icon } from 'lucide-react'
 import BrandlistyWidget from '../juankui/brandlisty/brandlisty-widget'
-import { MagicCard } from '../magicui/magic-card'
 import { fixAttribs } from '@/lib/utils'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '../ui/accordion'
 
