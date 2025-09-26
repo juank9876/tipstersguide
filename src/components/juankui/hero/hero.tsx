@@ -236,8 +236,6 @@ export function HeroPost({ title, excerpt, author_avatar, author_name, created_a
 
         </div>
       </motion.div>
-
-
     </section >
   )
 }
