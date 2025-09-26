@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { ParticlesFull } from "../hero/particles";
-import { htmlContentWidth, htmlContentWidthMobile, isParticles } from "@/config/options";
+import { isParticles } from "@/config/options";
 
 interface SectionProps {
   children: ReactNode,
@@ -8,18 +8,15 @@ interface SectionProps {
   description?: string,
   gradientBackground?: 'bg-gradient-middle' | 'bg-gradient-top' | 'bg-gradient-bottom' | ''
   className?: string
-  style?: React.CSSProperties
 }
 
-export function Section({ children, className, style }: SectionProps) {
+export function Section({ children }: SectionProps) {
   return (
-    <div
-      className={`relative flex flex-col w-full lg:w-[70vw] h-full items-center justify-center ${className}`}
-      style={style}
-    >
+    <section className={`relative flex w-full items-center justify-center `}>
       {isParticles && <ParticlesFull />}
-
-      {children}
-    </div>
+      <div className="w-[90vw] lg:w-[60vw] ">
+        {children}
+      </div>
+    </section>
   )
 }
