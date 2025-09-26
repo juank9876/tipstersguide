@@ -20,7 +20,7 @@ export async function Header({ normalizedItems, allSlugs, categoriesItems, setti
 
   return (
     <ClientHeaderWrapper>
-      <div className="w-custom mx-auto flex h-full flex-row items-center justify-between">
+      <div className="w-full mx-auto flex h-full flex-row items-center justify-between">
         <Logo {...settings} />
 
         <div className="hidden lg:flex">
