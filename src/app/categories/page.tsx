@@ -9,9 +9,6 @@ import { Metadata } from "next"
 import { createMetadata } from "../seo/createMetadata"
 
 
-export async function generateMetadata(): Promise<Metadata> {
-  return await createMetadata();
-}
 
 export default async function CategoriesPage() {
   const categories = await fetchCategories()
