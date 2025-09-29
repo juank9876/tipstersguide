@@ -1,66 +1,57 @@
+
 import HtmlRenderer from '@/components/html-transform/html-renderer'
 import { PrePage } from '@/components/juankui/pre-rendered/pre-page'
-import { fetchArticleById, fetchPageById, fetchSlugToId } from '@/api-fetcher/fetcher'
+import { PrePost } from '@/components/juankui/pre-rendered/pre-post'
 import NotFound from '@/app/not-found'
 import { createMetadata } from '@/app/seo/createMetadata'
-import { PrePost } from '@/components/juankui/pre-rendered/pre-post'
+import {
+  getContentData,
+  getPageFromSlug,
+} from '@/lib/fetch-data/getPageOrPostData'
+import { handleRedirect } from '@/utils/handleRedirect'
 
-async function getPageFromParams({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const id = await fetchSlugToId(slug, "page")
 
-  const page = await fetchPageById(id || "")
-  return page
+  await handleRedirect(slug)
+  const meta = await createMetadata(slug)
+  console.log(meta)
+  return meta
 }
 
-async function getPostFromParams({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const id = await fetchSlugToId(slug, "post")
+  const content = await getContentData(slug)
+  //por seguridad otro check, ya que el primero se ejecuta con delay
+  await handleRedirect(slug)
+  if (!content) {
+    return <NotFound />
+  }
 
-  const post = await fetchArticleById(id || "")
-  return post
-}
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const page = await getPageFromParams({ params })
+  // Renderizar según el tipo de contenido
+  if (content.type === 'page') {
+    const { data: page } = content
+    return (
+      <PrePage page={page}>
+        <HtmlRenderer
+          html={page.html_content}
+          cssContent={page.css_content || undefined}
+        />
+      </PrePage>
+    )
+  }
 
-  return await createMetadata(page);
-}
-
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const page = await getPageFromParams({ params })
-
-  if (page) return (
-    <PrePage page={page}>
-      <HtmlRenderer html={page.html_content} cssContent={page.css_content || undefined} />
-    </PrePage>
-  )
-
-  if (!page) {
-    const post = await getPostFromParams({ params })
-
-    if (post) return (
+  else if (content.type === 'post') {
+    const { data: post } = content
+    return (
       <PrePost post={post.post}>
-        <HtmlRenderer html={post.post.html_content} cssContent={post.post.css_content || undefined} />
+        <HtmlRenderer
+          html={post.post.html_content}
+          cssContent={post.post.css_content || undefined}
+        />
       </PrePost>
     )
-    else return <NotFound />
   }
+  else return <NotFound />
 }

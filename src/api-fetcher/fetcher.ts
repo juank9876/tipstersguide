@@ -18,7 +18,7 @@ interface FetcherParams {
 export interface ResponseInterface<T = unknown> {
   status: string
   message: string
-  data: T // Puedes ajustar el tipo según lo que esperes
+  data: T // Puedes ajustar el tipo según lo que esperesa
 }
 
 export async function fetcher<T>({ method, id, type, slug, category_id, path }: FetcherParams): Promise<T> {
@@ -87,7 +87,7 @@ export async function fetchAuthorById(id: string): Promise<Author> {
   return fetcher<Author>({ method: "author", id });
 }
 
-type PermalinkType = "category" | "post"
+export type PermalinkType = "category" | "post" | "page"
 export async function fetchPermalink(id: string, type: PermalinkType): Promise<PermalinkData> {
   return fetcher<PermalinkData>({ method: "permalink", id, type });
 }
