@@ -2,9 +2,15 @@ import { debug, debugLog } from "@/config/debug-log";
 import { Footer } from "@/types/footer";
 import { AgeVerification, Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
 
-type MethodType =
-  "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
-  "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect" | "robots";
+export const methods = [
+  "category-posts", "articles", "article", "pages", "page",
+  "category", "categories", "menu", "site-settings",
+  "authors", "author", "permalink", "all-slugs", "slug-to-id",
+  "homepage", "tags", "footer", "cookies", "age-verification",
+  "check-redirect", "robots", "sitemap"
+] as const;
+
+export type MethodType = (typeof methods)[number];
 
 interface FetcherParams {
   method: MethodType;
@@ -13,16 +19,41 @@ interface FetcherParams {
   slug?: string
   category_id?: string
   path?: string
+  pagination?: number
+  per_page?: number
+  with_meta?: boolean
 }
 
 export interface ResponseInterface<T = unknown> {
   status: string
   message: string
   data: T // Puedes ajustar el tipo según lo que esperesa
+  meta: MetaArticle;
 }
 
-export async function fetcher<T>({ method, id, type, slug, category_id, path }: FetcherParams): Promise<T> {
+export interface MetaArticle {
+  total: number;
+  per_page: number;
+  current_page: number;
+  total_pages: number;
+  has_next: boolean;
+  has_prev: boolean;
+  next_page: number;
+  prev_page: number;
+}
+export type PaginatedResponse<T> = {
+  data: T;
+  meta: MetaArticle;
+};
+
+// Sobrecargas
+export async function fetcher<T>(params: FetcherParams & { with_meta: true }): Promise<PaginatedResponse<T>>;
+export async function fetcher<T>(params: FetcherParams & { with_meta?: false }): Promise<T>;
+
+export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedResponse<T> | null> {
+  const { method, id, type, slug, category_id, path, pagination, per_page, with_meta } = params
   const baseUrl = `https://intercms.dev/api/v2/data.php`
+
   const url = baseUrl +
     `?method=${method}` +
     `&api_key=${process.env.API_KEY}` +
@@ -31,28 +62,38 @@ export async function fetcher<T>({ method, id, type, slug, category_id, path }: 
     (type ? `&type=${type}` : ``) +
     (slug ? `&slug=${slug}` : ``) +
     (category_id ? `&category_id=${category_id}` : ``) +
-    (path ? `&path=${path}` : ``)
+    (path ? `&path=${path}` : ``) +
+    (pagination ? `&page=${pagination}` : ``) +
+    (per_page ? `&per_page=${per_page}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
 
   try {
     const res = await fetch(url, {
-      next: { revalidate: 3 },
-      //cache: 'no-cache'
+      next: { revalidate: 0 },
+
     })
     const data: ResponseInterface<T> = await res.json();
 
     if (data.status === "success") {
-      return data.data
+      if (with_meta && data.meta) {
+        return {
+          data: data.data,
+          meta: data.meta
+        } as PaginatedResponse<T>;
+      }
+      return data.data as T;
+    } else if (data.status === "error") {
+      console.error("Resource not found:", data.message);
+      return null
     }
 
   } catch (error) {
     console.error(url, method)
-    console.error("Error fetching data:", error);
-    return undefined as T;
+    console.error("Api not working:", error);
+    throw error;
   }
-
-  return undefined as T; // Retorna undefined si hay un error
+  return null // Retorna undefined si hay un error
 }
 
 export async function fetchPages() {
@@ -61,9 +102,16 @@ export async function fetchPages() {
 export async function fetchPageById(id: string): Promise<Page> {
   return fetcher<Page>({ method: "page", id });
 }
-export async function fetchArticles() {
-  return fetcher<Post[]>({ method: "articles" });
+// Helper functions con tipado correcto para POSTS
+export async function fetchArticles(params: { pagination?: number; per_page?: number; with_meta: true; category_id?: string }): Promise<PaginatedResponse<Post[]>>;
+export async function fetchArticles(params: { pagination?: number; per_page?: number; with_meta?: false; category_id?: string }): Promise<Post[]>;
+export async function fetchArticles({ pagination, per_page, with_meta, category_id }: { pagination?: number, per_page?: number, with_meta?: boolean, category_id?: string }): Promise<Post[] | PaginatedResponse<Post[]>> {
+  if (with_meta) {
+    return fetcher<Post[]>({ method: "articles", pagination, per_page, with_meta: true, category_id });
+  }
+  return fetcher<Post[]>({ method: "articles", pagination, per_page, category_id });
 }
+
 export async function fetchArticleById(id: string) {
   return fetcher<PostResponse>({ method: "article", id });
 }
@@ -192,3 +240,28 @@ export interface Robots {
 export async function fetchRobots() {
   return fetcher<Robots>({ method: "robots" });
 }
+export type SitemapUrl = {
+  loc: string
+  lastmod: string
+  changefreq:
+  | "always"
+  | "hourly"
+  | "daily"
+  | "weekly"
+  | "monthly"
+  | "yearly"
+  | "never"
+  priority: string // viene como "0.8" en string
+}
+
+export type SitemapResponse = {
+  xml_content: string
+  content_type: "application/xml"
+  urls_count: number
+  generated_at: string
+  urls: SitemapUrl[]
+}
+export async function fetchSitemap() {
+  return fetcher<SitemapResponse>({ method: "sitemap" });
+}
+

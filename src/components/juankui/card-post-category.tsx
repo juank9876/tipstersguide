@@ -5,15 +5,15 @@ import { decodeHtmlEntities, formatDate, limitCharacters } from '@/lib/utils'
 import { Link } from '@/components/juankui/optionals/link'
 import { Category, Post } from '@/types/types'
 
-export function CardPostCategory({ post, category }: { post: Post, category: Category }) {
-  //const categoryUrl = category.parent_id ? category.parent_slug + "/" + category.slug : category.slug
-  const categoryUrl = category.slug
+export function CardPostCategory({ post }: { post: Post }) {
 
   return (
     <>
       {/*Card para PC*/}
       <div className="rounded-lg w-[250px] h-[400px] group relative overflow-hidden border-none p-0 shadow-none transition-all duration-300 hover:scale-[1.02]">
-        <Link href={`${categoryUrl}/${post.slug}`} className="h-full w-full">
+        <Link
+          href={post.seo_url}
+          className="h-full w-full">
 
           <div
             className="relative h-full w-full bg-cover bg-center transition-transform duration-300"
@@ -72,7 +72,7 @@ export function CardPostCategory({ post, category }: { post: Post, category: Cat
 
       {/*Card para movil*/}
       <Card className="duration-400 scale-custom relative w-full overflow-hidden border-none p-0 shadow-none transition hover:bg-[var(--color-primary-dark)] lg:hidden">
-        <Link href={`/categories/${category.slug}/${post.slug}`} className="block w-full">
+        <Link href={post.seo_url} className="block w-full">
 
 
           {/* Imagen como background */}

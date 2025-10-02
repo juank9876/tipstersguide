@@ -59,6 +59,7 @@ function LayoutBody({
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // Fetch de datos en paralelo
   const layoutData = await fetchLayoutData();
+
   const { settings, cookies, ageVerification } = layoutData;
 
   // Generar fuente y colores a partir de settings

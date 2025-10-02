@@ -3,6 +3,7 @@ import { debug, debugLog } from "@/config/debug-log";
 import { getContentData } from "@/lib/fetch-data/getPageOrPostData";
 import { createPageTitle } from "@/lib/utils";
 import { capitalize } from "@/utils/capitalize";
+import { fixSeoUrlSlash } from "@/utils/fixSeoUrlSlash";
 import { Metadata } from "next";
 
 export async function createMetadata(slug: string): Promise<Metadata> {
@@ -10,6 +11,7 @@ export async function createMetadata(slug: string): Promise<Metadata> {
     const postOrPageOrCategory = await getContentData(slug)
 
     if (postOrPageOrCategory?.type === 'page' || postOrPageOrCategory?.type === 'post') {
+        console.log('ESTO ES UNA PAGE')
         const page = postOrPageOrCategory.type === 'page' ? postOrPageOrCategory.data : postOrPageOrCategory.data.post
         debugLog(debug.createMetadata,
             `[+] createMetadata: 
@@ -24,6 +26,10 @@ export async function createMetadata(slug: string): Promise<Metadata> {
                 metadataBase: ${process.env.NEXT_PUBLIC_SITE_URL},
         `
         )
+        function convertToBoolean(value: number | undefined): boolean {
+            return value === 1 || value === 1
+        }
+        console.log(convertToBoolean(page?.robots_noarchive))
         return {
 
             title: await createPageTitle(page?.meta_title, page?.title) || settings.site_title,
@@ -46,9 +52,9 @@ export async function createMetadata(slug: string): Promise<Metadata> {
             robots: {
                 index: page?.robots_index === "index",
                 follow: page?.robots_follow === "follow",
-                nocache: !!page?.robots_noarchive,
-                nosnippet: !!page?.robots_nosnippet,
-                noimageindex: !!page?.robots_noimageindex,
+                nocache: convertToBoolean(page?.robots_noarchive),
+                nosnippet: convertToBoolean(page?.robots_nosnippet),
+                noimageindex: convertToBoolean(page?.robots_noimageindex),
             },
 
             // --- Twitter ---
@@ -94,6 +100,7 @@ export async function createMetadata(slug: string): Promise<Metadata> {
         }
     }
     else {
+        console.log('ESTO NO ES UNA PAGE, RENDERIZANDO', settings.site_title, settings.site_description)
         return {
             title: settings.site_title,
             description: settings.site_description,
