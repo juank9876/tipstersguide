@@ -80,7 +80,7 @@ export async function getContentData(slug: string) {
     if (page) {
         return { type: 'page' as const, data: page }
     }
-    console.log("page", page)
+
     const post = await getPostFromSlug(slug)
     if (post) {
         return { type: 'post' as const, data: post }
@@ -90,7 +90,7 @@ export async function getContentData(slug: string) {
     if (category) {
         return { type: 'category' as const, data: category }
     }
-    return null
+    return undefined
 }
 
 //BOOLEANO PARA COMPARAR URL ACTUAL (SEO_URL POR DEFECTO) CON PERMALINK
@@ -99,12 +99,10 @@ export async function isCheckUrlPermalink(slug: string, slugString: string, type
     if (!id) return console.log("No id found to fetch Permalink")
 
     const { permalink } = await fetchPermalink(id, type)
-    console.log("permalink", permalink)
-    console.log("permalinkType", type)
-    console.log("slugString", slugString)
+    console.log("permalink", permalink, type)
 
     if (permalink !== slugString) {
-        console.log("permalink no match")
+        console.log("permalink no match", permalink, slugString)
         return false
     }
     else return true

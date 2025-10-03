@@ -84,20 +84,16 @@ export function fixAttribs(attribs: Record<string, any>) {
   return newAttribs;
 }
 
-export async function createPageTitle(pageMetaTitle: string | undefined, pageTitle: string | undefined) {
+export async function createPageTitle(pageMetaTitle: string | undefined, pageTitle: string | undefined): Promise<string> {
   const settings = await contextSiteSettings()
+  console.log('Title de la pagina:', pageTitle)
+  console.log('Meta Title de la pagina:', pageMetaTitle)
+  console.log("")
+  console.log('Meta title global:', settings.meta_title)
+  console.log('Title global:', settings.site_title)
 
-  if (!pageMetaTitle && pageTitle) {
-    return capitalize(settings.site_title) + " | " + capitalize(pageTitle);
-  }
-
-  else if (!pageMetaTitle && !pageTitle) {
-    return capitalize(settings.site_title);
-  }
-
-  else if (pageMetaTitle) return capitalize(settings.site_title) + " | " + capitalize(pageMetaTitle)
-
-
+  const titleForSeoGoogle = pageMetaTitle || pageTitle || settings.meta_title
+  return titleForSeoGoogle
 }
 
 export function decodeHtmlEntities(str: string) {
