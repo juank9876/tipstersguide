@@ -2,10 +2,13 @@ import { debug, debugLog } from "@/config/debug-log";
 import { Footer } from "@/types/footer";
 import { AgeVerification, Author, Category, NavItemType, Page, PermalinkData, Post, PostResponse, SiteSettings } from "@/types/types";
 
-type MethodType =
+export type MethodType =
   "category-posts" | "articles" | "article" | "pages" | "page" | "category" | "categories" | "menu" | "site-settings" | "authors" |
   "author" | "permalink" | "all-slugs" | "slug-to-id" | "homepage" | "tags" | "footer" | "cookies" | "age-verification" | "check-redirect" | "robots" | "sitemap";
 
+export const methods: MethodType[] = [
+  "category-posts", "articles", "article", "pages", "page", "category", "categories", "menu", "site-settings", "authors", "author", "permalink", "all-slugs", "slug-to-id", "homepage", "tags", "footer", "cookies", "age-verification", "check-redirect", "robots", "sitemap"
+]
 interface FetcherParams {
   method: MethodType;
   id?: string
