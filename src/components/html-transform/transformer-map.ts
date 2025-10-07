@@ -14,6 +14,7 @@ import { transformTestimonials, transformBlockquote, transformTakeaways } from '
 import type { JSX } from 'react'
 import { transformAccordion, transformAccordionItem, transformAccordionHeader, transformAccordionContent, fixCollapse, fixAccordionWidth } from './transformAccordion/accordion'
 import { transformBrandlisty } from './transformers'
+import { transformTermContentH3 } from './transformImportantTerms/transformTermItem'
 
 //import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
 
@@ -38,6 +39,10 @@ const rules: TransformerRule[] = [
     matcher: (el) => el.attribs && ('data-apikey' in el.attribs || 'apikey' in el.attribs || el.attribs['data-gjs-type'] === 'brandlisty'),
     transformer: transformBrandlisty,
   },
+  {
+    matcher: (el) => el.attribs && el.name === 'h3' && ('draggable' in el.attribs && 'data-highlightable' in el.attribs),
+    transformer: transformTermContentH3,
+  },
 
   { className: 'btn', transformer: transformButton },
   { className: 'card-img-top', transformer: transformImg },
@@ -50,7 +55,6 @@ const rules: TransformerRule[] = [
   { className: 'accordion-item', transformer: transformAccordionItem },
   { className: 'accordion-header', transformer: transformAccordionHeader },
   { className: 'accordion-body', transformer: transformAccordionContent },
-
   //Fixes 
   { className: 'accordion-collapse', transformer: fixCollapse },
 
