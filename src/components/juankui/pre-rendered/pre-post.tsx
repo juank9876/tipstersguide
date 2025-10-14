@@ -12,6 +12,7 @@ import { LatestPosts } from '../sidebar-with-posts/latest-posts'
 import { AuthorPosts } from '../sidebar-with-posts/author-posts'
 import { CategoryPosts } from '../sidebar-with-posts/category-posts'
 import { TagPosts } from '../sidebar-with-posts/tag-posts'
+import { config } from '@/config/config'
 
 function PostBody({ children, post }: { children: ReactNode, post: Post }) {
   return (
@@ -48,7 +49,7 @@ export function PrePost({ children, post }: { children: ReactNode, post: Post })
         <div className="w-[90vw] pt-20 flex gap-5">
           <PostBody children={children} post={post} />
 
-          {cssSettings.styles.applySidebarNews && (
+          {config.styles.applySidebarNews && (
             <div className="w-[800px] flex-col gap-5 lg:flex hidden">
               <LatestPosts />
               <AuthorPosts author={author} />
