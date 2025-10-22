@@ -3,10 +3,11 @@ import { ArrowRight, FolderCheck, Newspaper } from "lucide-react";
 import { Link } from "../optionals/link";
 import { NewsCard } from "./card-post";
 
-export async function CategoryPosts({ category, className }: { category: { id: string | undefined, name: string | undefined, slug: string | undefined }, className?: string }) {
+export async function CategoryPosts({ category, className, postId }: { category: { id: string | undefined, name: string | undefined, slug: string | undefined }, className?: string, postId?: string }) {
     if (!category.id) return null;
 
-    const posts = await fetchArticlesByCategoryId(category.id);
+    let posts = await fetchArticlesByCategoryId(category.id);
+    posts = posts.filter((post) => post.id !== postId)
 
     if (!posts || posts.length === 0) {
         return null;
@@ -48,7 +49,7 @@ export async function CategoryPosts({ category, className }: { category: { id: s
                         href={'/blog'}
                         className="flex items-center justify-center gap-2 w-full py-3 px-4 text-sm font-semibold text-white bg-[var(--color-accent)] hover:bg-[var(--color-accent-dark)] hover:text-white rounded-lg transition-all duration-200 group"
                     >
-                        <span>View all news</span>
+                        <span>View all</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </Link>
                 </div>

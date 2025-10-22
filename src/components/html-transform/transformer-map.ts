@@ -13,9 +13,9 @@ import { transformImg, transformSvg } from './transformMedia/media'
 import { transformTestimonials, transformBlockquote, transformTakeaways } from './transformSpecial/special'
 import type { JSX } from 'react'
 import { transformAccordion, transformAccordionItem, transformAccordionHeader, transformAccordionContent, fixCollapse, fixAccordionWidth } from './transformAccordion/accordion'
-import { transformBrandlisty } from './transformers'
+import { transformBrandlisty } from './transformBrandlisty/brandlisty'
 import { transformTermContentH3 } from './transformImportantTerms/transformTermItem'
-
+import { transformInfoCardsContainer } from './transformCards/info-cards-containter'
 //import { transformTable, transformTBody, transformTd, transformThead, transformTr } from './transformTable/table'
 
 type TransformerRule = {
@@ -55,9 +55,10 @@ const rules: TransformerRule[] = [
   { className: 'accordion-item', transformer: transformAccordionItem },
   { className: 'accordion-header', transformer: transformAccordionHeader },
   { className: 'accordion-body', transformer: transformAccordionContent },
+
   //Fixes 
   { className: 'accordion-collapse', transformer: fixCollapse },
-
+  { className: 'info-cards-container', transformer: transformInfoCardsContainer },
   //Tags HTML
   { tagName: 'form', transformer: transformForm },
   { tagName: 'h2', transformer: transformH2 },

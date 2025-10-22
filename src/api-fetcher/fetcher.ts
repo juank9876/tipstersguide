@@ -1,3 +1,4 @@
+import { type BrandlistyCardType } from "@/components/juankui/brandlisty/brandlisty-card";
 import { debug, debugLog } from "@/config/debug-log";
 import { ContentType } from "@/lib/fetch-data/getPageOrPostData";
 import { Footer } from "@/types/footer";
@@ -95,7 +96,6 @@ export async function fetcher<T>(params: FetcherParams): Promise<T | PaginatedRe
     (author_id ? `&author_id=${author_id}` : ``)
 
   debugLog(debug.fetcher, `[+] fetcher url: ` + method.toUpperCase() + " " + url)
-  { method === "articles" && console.log("fetchArticles", url) }
   try {
     const res = await fetch(url, {
       next: { revalidate: 0 },
@@ -317,6 +317,70 @@ export async function fetchCustomScript() {
 
 export async function fetchTagById(id: string): Promise<Tag> {
   return fetcher<Tag>({ method: "tag", id });
+}
+//: Promise<BrandlistyCard[]>
+
+function filterByCountryCode(brands: BrandlistyCardType[], countryCode: string): BrandlistyCardType[] {
+  return brands.filter((brand) => {
+    if (brand.geo === 'WW') return true;
+    if (Array.isArray(brand.geo)) {
+      return brand.geo.includes(countryCode);
+    }
+    return false;
+  });
+}
+
+export async function fetchBrandlistyApi({ countryCode, apiKey, listId } : { countryCode: string, apiKey?: string, listId?: string }) : Promise<BrandlistyCardType[]> {
+  //const apiKey = process.env.BRANDLISTY_API_KEY || ''
+  //const listId = process.env.BRANDLISTY_LIST_ID || ''
+  //const boton = "Visit now"
+  //const limit = "5"
+  let brandlistyApiKey = process.env.BRANDLISTY_API_KEY
+  let brandlistyListId = process.env.BRANDLISTY_LIST_ID
+
+  if (apiKey !== undefined && listId !== undefined) {
+    brandlistyApiKey = apiKey
+    brandlistyListId = listId 
+  }
+
+
+  const response = await fetch(
+    `https://pro.brandlisty.com/api/v1/list.php?token=${brandlistyApiKey}&hash=${brandlistyListId}`,
+    {
+        method: 'GET',
+        headers: {
+            'User-Agent': 'MyApp/1.0; https://spinbonuscasino.com'
+        }
+    }
+  )
+  const data = await response.json();
+  let brands = data?.data?.brands as BrandlistyCardType[] || [];
+  // Filtramos por país o WW
+  brands = filterByCountryCode(brands, countryCode);
+
+  // Ordenamos por position siempre
+  return brands.sort((a, b) => Number(a.position) - Number(b.position));
+}
+
+export async function getUserCountry({ ip } : { ip: string }): Promise<string> {
+  try {
+    const res = await fetch(`https://ip.guide/${ip}`);
+    if (!res.ok) throw new Error('Error al obtener IP');
+
+    const data = await res.json();
+
+    // Dependiendo de la respuesta de ip.guide:
+    const country =
+      data?.location?.country_code ||
+      data?.country_code ||
+      data?.network?.autonomous_system?.country ||
+      'WW'; // fallback
+
+    return country.toUpperCase();
+  } catch (err) {
+    console.error('Error en getUserCountry:', err);
+    return 'WW'; // fallback a "Worldwide" si falla
+  }
 }
 
 // Example URL:
