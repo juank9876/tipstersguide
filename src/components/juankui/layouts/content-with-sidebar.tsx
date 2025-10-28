@@ -55,18 +55,18 @@ export function ContentWithSidebar({
 
     return (
         <Section className={`pt-20 flex justify-center items-center ${className}`}>
-            <div className={showSidebar ? `flex flex-row justify-center ${containerGap} ${layoutWidth}` : `flex justify-center ${contentMaxWidth}`}>
+            <div className={showSidebar ? `flex lg:flex-row flex-col justify-center lg:items-start items-center ${containerGap} ${layoutWidth}` : `flex justify-center ${contentMaxWidth}`}>
                 {/* Spacer izquierdo solo si hay sidebar y está habilitado */}
                 {/*showSidebar && spacerEnabled && <div className={`${spacerWidth} hidden lg:block`} />*/}
 
                 {/* Contenido principal */}
-                <div className={showSidebar ? ' w-full' : 'w-full'}>
+                <div className={showSidebar ? 'h-full w-full' : 'h-full w-full'}>
                     {children}
                 </div>
 
                 {/* Sidebar */}
                 {showSidebar && (
-                    <div className={`flex-col ${containerGap} lg:flex hidden ${sidebarWidth}`}>
+                    <div className={`flex-col ${containerGap} flex ${sidebarWidth}`}>
                         {sidebarConfig.brandlistyLite && <BrandlistyLite />}
                         {sidebarConfig.latest && <LatestPosts postId={sidebarData?.postId} />}
                         {sidebarConfig.author && sidebarData?.author && (

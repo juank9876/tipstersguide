@@ -2,7 +2,7 @@ import "./globals.css";
 import './globals-on.css';
 import { Header } from "@/components/juankui/wrappers/nav/header";
 import { Footer } from "@/components/juankui/wrappers/footer/footer";
-import { fetchCookies, fetchSiteSettings, fetchAgeVerification, Cookies, fetchCustomScript } from "@/api-fetcher/fetcher";
+import { fetchCookies, fetchSiteSettings, fetchAgeVerification, Cookies } from "@/api-fetcher/fetcher";
 import { ViewTransitions } from 'next-view-transitions'
 import { Providers } from "./providers";
 import { generateFontsFromSettings } from "@/utils/fonts";
@@ -45,9 +45,11 @@ function LayoutBody({
       suppressHydrationWarning
     >
       <Providers>
-        <div className="flex max-w-screen min-h-[100dvh] flex-col">
+        <div className="max-w-screen flex min-h-[100dvh] h-full flex-col">
           <Header />
-          {children}
+          <div className="flex-1 flex flex-col">
+            {children}
+          </div>
           <Footer />
         </div>
         <CookieConsent cookies={cookies} />
